@@ -5,9 +5,15 @@ using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private float timeBetweenSpawns = 5f;
+    private Fight_Grid_Manager fgm;
+    private bool canSpawn = true;
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        fgm = Fight_Grid_Manager.Instance;
+    }
+
     void Start()
     {
         // Vector3 start = Fight_Grid_Manager.Instance.PathVectors[0];
@@ -19,14 +25,19 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(canSpawn)
         {
-            GameObject enemy = ObjectPooler.Instance.Get("Enemy", Fight_Grid_Manager.Instance.PathVectors[0], Quaternion.identity);
-            enemy.GetComponent<Enemy>().Index = 0;
+            // SPAWN
+            GameObject enemy = ObjectPooler.Instance.Get("Peasant", fgm.PathVectors[0], Quaternion.identity);
+            enemy.GetComponent<Peasant>().Index = 0;
+            StartCoroutine(Wait(timeBetweenSpawns));
         }
     }
 
-    void FixedUpdate()
+    IEnumerator Wait(float time)
     {
+        canSpawn = false;
+        yield return new WaitForSeconds(time);
+        canSpawn = true;
     }
 }

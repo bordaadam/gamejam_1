@@ -10,15 +10,7 @@ public class Enemy : MonoBehaviour
     private int index = 0;
     public int Index
     {
-        get
-        {
-            return index;
-        }
-
-        set
-        {
-            index = value;
-        }
+        get; set;
     }
 
     void Start()
@@ -28,13 +20,13 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        GoToNext(manager.PathVectors[index]);
+        GoToNext(manager.PathVectors[Index]);
 
         if (reachedPoint)
         {
             reachedPoint = false;
-            index++;
-            if (index > manager.PathVectors.Count - 1) // If we reached the final destination
+            Index++;
+            if (Index > manager.PathVectors.Count - 1) // If we reached the final destination
             {
                 //TODO: put back
                 ObjectPooler.Instance.Put("Enemy", gameObject);
@@ -47,5 +39,6 @@ public class Enemy : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, next, movementSpeed * Time.deltaTime);
         if (transform.position == next) reachedPoint = true;
     }
+
 
 }

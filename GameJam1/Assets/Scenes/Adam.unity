@@ -198,8 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707e83349ca0235429d8be3a5c606911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5136268795133421388, guid: dc36e4a1e78785e45be092ad102f569f,
-    type: 3}
+  timeBetweenSpawns: 2
 --- !u!4 &393105049
 Transform:
   m_ObjectHideFlags: 0
@@ -419,8 +418,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: Enemy
-    prefab: {fileID: 5136268795133421388, guid: dc36e4a1e78785e45be092ad102f569f,
+  - tag: Peasant
+    prefab: {fileID: 7621114129856519584, guid: a9b095d6ae0e3cb4c83b55e85197b63f,
       type: 3}
     size: 5
 --- !u!4 &1391422196
