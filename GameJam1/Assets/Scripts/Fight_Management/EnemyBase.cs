@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected float maxHealth;
-    [SerializeField] protected float currentHealth;
+    [SerializeField] public float currentHealth;
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected string tag;
     [SerializeField] protected float damage;
@@ -28,8 +28,17 @@ public abstract class EnemyBase : MonoBehaviour
                 // ENEMY REACHED THE FINAL TILE!
                 gm.CurrentHealth -= damage;
                 gm.RemainingEnemy--;
+                FillUpHealth();
                 ObjectPooler.Instance.Put(tag, gameObject);
             }
+        }
+
+        // If the enemy dies...
+        if(currentHealth < 0)
+        {
+            gm.RemainingEnemy--;
+            FillUpHealth();
+            ObjectPooler.Instance.Put(tag, gameObject);
         }
     }
 
@@ -37,5 +46,18 @@ public abstract class EnemyBase : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, next, movementSpeed * Time.deltaTime);
         if (transform.position == next) reachedPoint = true;
+    }
+
+    private void FillUpHealth()
+    {
+        if(GetComponent<Peasant>())
+        {
+            GetComponent<Peasant>().currentHealth = maxHealth;
+        }
+
+        if (GetComponent<Knight>())
+        {
+            GetComponent<Knight>().currentHealth = maxHealth;
+        }
     }
 }

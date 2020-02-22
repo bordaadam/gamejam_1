@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     private const string KNIGHT = "Knight";
     private const string PEASANT = "Peasant";
 
-    void Awake()
+    void Start()
     {
         fgm = Fight_Grid_Manager.Instance;
         gm = GameManager.Instance;
@@ -26,6 +26,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if(canSpawn && gm.NeedToSpawn > 0)
         {
+            Debug.Log("Spawnolok enemyt!");
             // SPAWN
             gm.NeedToSpawn--;
             SpawnRandom();
