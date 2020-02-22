@@ -14,22 +14,13 @@ public class EnemySpawner : MonoBehaviour
         fgm = Fight_Grid_Manager.Instance;
     }
 
-    void Start()
-    {
-        // Vector3 start = Fight_Grid_Manager.Instance.PathVectors[0];
-        //GameObject enemy = Instantiate(enemyPrefab, start, Quaternion.identity);
-       // GameObject enemy = ObjectPooler.Instance.SpawnFromPool("Enemy", Fight_Grid_Manager.Instance.PathVectors[0], Quaternion.identity);
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if(canSpawn)
         {
             // SPAWN
-            GameObject enemy = ObjectPooler.Instance.Get("Peasant", fgm.PathVectors[0], Quaternion.identity);
-            enemy.GetComponent<Peasant>().Index = 0;
+            GameObject enemy = ObjectPooler.Instance.Get("Knight", fgm.PathVectors[0], Quaternion.identity);
+            enemy.GetComponent<Knight>().Index = 0;
             StartCoroutine(Wait(timeBetweenSpawns));
         }
     }

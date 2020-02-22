@@ -154,7 +154,7 @@ MonoBehaviour:
     type: 3}
   wideness: 10
   depth: 10
-  pathColor: {r: 1, g: 0.87590504, b: 0, a: 1}
+  pathColor: {r: 1, g: 0, b: 0.587409, a: 1}
 --- !u!4 &373551365
 Transform:
   m_ObjectHideFlags: 0
@@ -422,6 +422,10 @@ MonoBehaviour:
     prefab: {fileID: 7621114129856519584, guid: a9b095d6ae0e3cb4c83b55e85197b63f,
       type: 3}
     size: 5
+  - tag: Knight
+    prefab: {fileID: 6211138151286373530, guid: 05297653bb102f64691e16b8a99fae1b,
+      type: 3}
+    size: 3
 --- !u!4 &1391422196
 Transform:
   m_ObjectHideFlags: 0
