@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:GameJam1/Assets/Anims.meta
+guid: e7cacb5aac6d0bc40820850251a91fb6
+=======
 guid: c1437188b4f4bc7429b4f17cd40500b8
+>>>>>>> e61fd29799a62d68f86bc6f38be507e90b909b49:GameJam1/Assets/Scripts/Buildings.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

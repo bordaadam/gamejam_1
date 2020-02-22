@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class PathManager : MonoBehaviour
 {
-    public GameObject[] pathVariants;
+    public List<GameObject> paths = new List<GameObject>();
+    public Sprite[] roads;
 }

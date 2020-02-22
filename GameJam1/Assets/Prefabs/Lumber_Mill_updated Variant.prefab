@@ -88,6 +88,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lumber_Mill_updated Variant
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 474bec7bd50df974786dc8dd514d40bb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Path
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 474bec7bd50df974786dc8dd514d40bb, type: 3}
 --- !u!1 &8151972442363187635 stripped
