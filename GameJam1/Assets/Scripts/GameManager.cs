@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
             LevelUp();
         }
 
-        if(false)
+        if(CurrentHealth < 0)
         {
             GameOver();
         }

@@ -16,6 +16,34 @@ MonoBehaviour:
   y_axis_speed_multiplier: 0
   z_axis_speed_multiplier: 0
   speed: 100
+--- !u!135 &1505574576
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3851569412429124133}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1505574575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3851569412429124133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20aca3b3577d19040b9e7210483b86d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingTime: 2
+  damage: 10
+  target: {fileID: 0}
 --- !u!1001 &5067227907283634988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26,17 +54,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 4296d3da19ed81148877205f9e334352,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.83335614
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4296d3da19ed81148877205f9e334352,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5575466
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4296d3da19ed81148877205f9e334352,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.1112263
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4296d3da19ed81148877205f9e334352,
         type: 3}
