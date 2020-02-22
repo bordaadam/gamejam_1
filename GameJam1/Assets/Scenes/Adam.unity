@@ -154,7 +154,7 @@ MonoBehaviour:
     type: 3}
   wideness: 10
   depth: 10
-  pathColor: {r: 1, g: 0.87590504, b: 0, a: 1}
+  pathColor: {r: 1, g: 0, b: 0.587409, a: 1}
 --- !u!4 &373551365
 Transform:
   m_ObjectHideFlags: 0
@@ -198,8 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707e83349ca0235429d8be3a5c606911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5136268795133421388, guid: dc36e4a1e78785e45be092ad102f569f,
-    type: 3}
+  timeBetweenSpawns: 2
 --- !u!4 &393105049
 Transform:
   m_ObjectHideFlags: 0
@@ -388,6 +387,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1391422194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1391422196}
+  - component: {fileID: 1391422195}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1391422195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391422194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3fbe238c32c9b4429f7e4688b736ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: Peasant
+    prefab: {fileID: 7621114129856519584, guid: a9b095d6ae0e3cb4c83b55e85197b63f,
+      type: 3}
+    size: 5
+  - tag: Knight
+    prefab: {fileID: 6211138151286373530, guid: 05297653bb102f64691e16b8a99fae1b,
+      type: 3}
+    size: 3
+--- !u!4 &1391422196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391422194}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.6219354, y: 2.9291153, z: 3.527688}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1562627335
 GameObject:

@@ -8,6 +8,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float movementSpeed;
     private bool reachedPoint = false;
     private int index = 0;
+    public int Index
+    {
+        get; set;
+    }
 
     void Start()
     {
@@ -16,15 +20,16 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        GoToNext(manager.PathVectors[index]);
+        GoToNext(manager.PathVectors[Index]);
 
         if (reachedPoint)
         {
             reachedPoint = false;
-            index++;
-            if (index > manager.PathVectors.Count - 1) // If we reached the final destination
+            Index++;
+            if (Index > manager.PathVectors.Count - 1) // If we reached the final destination
             {
-                Destroy(this);
+                //TODO: put back
+                ObjectPooler.Instance.Put("Enemy", gameObject);
             }
         }
     }
@@ -34,5 +39,6 @@ public class Enemy : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, next, movementSpeed * Time.deltaTime);
         if (transform.position == next) reachedPoint = true;
     }
+
 
 }

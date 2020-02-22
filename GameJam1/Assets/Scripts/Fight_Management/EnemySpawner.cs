@@ -5,19 +5,30 @@ using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private float timeBetweenSpawns = 5f;
+    private Fight_Grid_Manager fgm;
+    private bool canSpawn = true;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Vector3 start = Fight_Grid_Manager.Instance.PathVectors[0];
-        GameObject enemy = Instantiate(enemyPrefab, start, Quaternion.identity);
-        
+        fgm = Fight_Grid_Manager.Instance;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(canSpawn)
+        {
+            // SPAWN
+            GameObject enemy = ObjectPooler.Instance.Get("Knight", fgm.PathVectors[0], Quaternion.identity);
+            enemy.GetComponent<Knight>().Index = 0;
+            StartCoroutine(Wait(timeBetweenSpawns));
+        }
+    }
+
+    IEnumerator Wait(float time)
+    {
+        canSpawn = false;
+        yield return new WaitForSeconds(time);
+        canSpawn = true;
     }
 }
