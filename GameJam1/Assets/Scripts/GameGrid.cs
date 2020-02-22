@@ -8,4 +8,5 @@ public class GameGrid : MonoBehaviour
 {
     public Vector2 pos;
     public structureType structure;
+    public GameObject[] objectsHeld = new GameObject[2]; //objectsHeld[0] -> natural resources; objectsHeld[1] -> buildings (and path)
 }
