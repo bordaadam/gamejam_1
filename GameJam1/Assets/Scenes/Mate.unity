@@ -604,98 +604,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &837520084
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 837520086}
-  - component: {fileID: 837520085}
-  m_Layer: 0
-  m_Name: Point Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &837520085
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 837520084}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 2
-  m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!4 &837520086
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 837520084}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 118.2707, y: -12.84, z: 44.32}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &869160307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,6 +1388,11 @@ MonoBehaviour:
     instantiateOffset: {x: 0, y: 0.51, z: 0}
     instantiateScale: {x: 0.1, y: 0.1, z: 0.1}
     instantiateRotation: {x: 0, y: 0, z: 0}
+    presentationScale: {x: 1, y: 1, z: 1}
+    presentationRotation: {x: 0, y: 0, z: 0}
+    presRotationOnX: 0
+    presRotationOnY: 1
+    presRotationOnZ: 0
     ownType: 2
     canBeBuiltOn: 6
     name: Javelin Tower
@@ -1492,6 +1405,11 @@ MonoBehaviour:
     instantiateOffset: {x: 0, y: 0.51, z: 0}
     instantiateScale: {x: 0.1, y: 0.1, z: 0.1}
     instantiateRotation: {x: 0, y: 0, z: 0}
+    presentationScale: {x: 1, y: 1, z: 1}
+    presentationRotation: {x: 0, y: 0, z: 0}
+    presRotationOnX: 0
+    presRotationOnY: 1
+    presRotationOnZ: 0
     ownType: 3
     canBeBuiltOn: 1
     name: Lumbermill
@@ -1504,12 +1422,53 @@ MonoBehaviour:
     instantiateOffset: {x: 0, y: 0.51, z: 0}
     instantiateScale: {x: 0.1, y: 0.1, z: 0.1}
     instantiateRotation: {x: 0, y: 0, z: 0}
+    presentationScale: {x: 1, y: 1, z: 1}
+    presentationRotation: {x: 0, y: 0, z: 0}
+    presRotationOnX: 0
+    presRotationOnY: 1
+    presRotationOnZ: 0
     ownType: 4
     canBeBuiltOn: 0
     name: Javelin Maker
     description: As the name suggests, this structure makes javelins to throw at
       the enemy.... or each other.... Not a very effective weapon, but kobolds aren't
       really smart either, the best they can do is make a stick pointy
+  - modell: {fileID: 4105030763573850547, guid: 0f34e4a74ead6320795e40884407cce5,
+      type: 3}
+    cameraOffset: {x: 0, y: -2, z: 10}
+    instantiateOffset: {x: 0, y: 0.51, z: 0}
+    instantiateScale: {x: 0.1, y: 0.1, z: 0.1}
+    instantiateRotation: {x: 0, y: 0, z: 0}
+    presentationScale: {x: 1, y: 1, z: 1}
+    presentationRotation: {x: 0, y: 0, z: 0}
+    presRotationOnX: 0
+    presRotationOnY: 1
+    presRotationOnZ: 0
+    ownType: 9
+    canBeBuiltOn: 7
+    name: Mine
+    description: Ooooohhhhh Shiiiiiiinieeeeessssssss.... Or rather just regular stone
+      ... Or maybe not, the kobolds wouldnt be able to tell anyways. Why would we
+      mine it then? Well by some unexplainable coincidence only the stone mined here
+      can be used to make magical runes. And those runes hurt.
+  - modell: {fileID: 6036023418429613411, guid: e9cc8afac434c3ab0bb3ea3bb8c7974e,
+      type: 3}
+    cameraOffset: {x: 0, y: -2, z: 10}
+    instantiateOffset: {x: 0, y: 0.51, z: 0}
+    instantiateScale: {x: 0.8, y: 0.8, z: 0.8}
+    instantiateRotation: {x: 0, y: 0, z: 0}
+    presentationScale: {x: 8, y: 8, z: 8}
+    presentationRotation: {x: 350, y: 0, z: 0}
+    presRotationOnX: 0
+    presRotationOnY: 1
+    presRotationOnZ: 0
+    ownType: 5
+    canBeBuiltOn: 0
+    name: Path
+    description: Why does a road need a description? Well I'm not sure either, however
+      I'm paid for typing long and detailed descriptions soooooo.... Did I mention
+      that this road is enchanted so the resources travel on it automatically in
+      the direction that the road is facing? No? Well I have now
   distanceFromCamera: 10
   nameText: {fileID: 1358864319}
   description: {fileID: 235218149}
