@@ -152,8 +152,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPrefab: {fileID: 1772780488288084621, guid: 5c5cb9e03be5fa6238070b71b1414d11,
     type: 3}
-  depth: 10
   wideness: 5
+  depth: 10
+  pathColor: {r: 0.9433962, g: 0.7666882, b: 0.3426486, a: 0}
 --- !u!4 &373551365
 Transform:
   m_ObjectHideFlags: 0
