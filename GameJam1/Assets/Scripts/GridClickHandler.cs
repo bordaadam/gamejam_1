@@ -5,6 +5,7 @@ using UnityEngine;
 public class GridClickHandler : MonoBehaviour
 {
     public GameObject path;
+    public GameObject Wood_Gatherer;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,9 @@ public class GridClickHandler : MonoBehaviour
                     {
                         //TODO: Build mode and building type check
                         hit.transform.gameObject.GetComponent<GameGrid>().structure = structureType.WOOD_GATHERER;
-                        hit.transform.gameObject.GetComponent<Renderer>().material.SetColor("_Color",Color.red);
+                        GameObject tmp = Instantiate(Wood_Gatherer,new Vector3(hit.transform.position.x,hit.transform.position.y + 0.51f,hit.transform.position.z),Quaternion.identity);
+                        hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[1] = tmp;
+                        //hit.transform.gameObject.GetComponent<Renderer>().material.SetColor("_Color",Color.red);
                     }
 
                     //Path placement
@@ -36,7 +39,10 @@ public class GridClickHandler : MonoBehaviour
                     {
                         //TODO: Build mode and building type check
                         hit.transform.gameObject.GetComponent<GameGrid>().structure = structureType.PATH;
-                        GameObject tmp = Instantiate(path,new Vector3(hit.transform.position.x,0.51f,hit.transform.position.z),Quaternion.identity);
+                        GameObject tmp = Instantiate(path,new Vector3(hit.transform.position.x,hit.transform.position.y + 0.51f,hit.transform.position.z),Quaternion.identity);
+                        Vector3 temp = transform.rotation.eulerAngles;
+                        temp.x = 90.0f;
+                        tmp.transform.rotation = Quaternion.Euler(temp);
                         hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[1] = tmp;
                         //hit.transform.gameObject.GetComponent<Renderer>().material.SetColor("_Color",Color.yellow);
                     }
