@@ -103,6 +103,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Javelin_Maker Variant
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d00c4b7e66398ed41af45527d57fd796,
+        type: 3}
+      propertyPath: m_TagString
+      value: Path
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d00c4b7e66398ed41af45527d57fd796, type: 3}
 --- !u!1 &4642630298192145429 stripped

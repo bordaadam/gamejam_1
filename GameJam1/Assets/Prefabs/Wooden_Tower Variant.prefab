@@ -88,6 +88,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wooden_Tower Variant
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4296d3da19ed81148877205f9e334352,
+        type: 3}
+      propertyPath: m_TagString
+      value: Path
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4296d3da19ed81148877205f9e334352, type: 3}
 --- !u!1 &3851569412429124133 stripped
