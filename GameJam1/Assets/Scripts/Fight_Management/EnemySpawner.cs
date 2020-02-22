@@ -5,28 +5,56 @@ using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private float timeBetweenSpawns = 5f;
+    private Fight_Grid_Manager fgm;
+    private GameManager gm;
+    private bool canSpawn = true;
 
-    // Start is called before the first frame update
-    void Start()
+    private const string KNIGHT = "Knight";
+    private const string PEASANT = "Peasant";
+
+    void Awake()
     {
-        // Vector3 start = Fight_Grid_Manager.Instance.PathVectors[0];
-        //GameObject enemy = Instantiate(enemyPrefab, start, Quaternion.identity);
-       // GameObject enemy = ObjectPooler.Instance.SpawnFromPool("Enemy", Fight_Grid_Manager.Instance.PathVectors[0], Quaternion.identity);
-        
+        fgm = Fight_Grid_Manager.Instance;
+        gm = GameManager.Instance;
     }
 
-    // Update is called once per frame
+    // csak akkor spawnoljunk ellenséget, ha remaining az > 0
+    // ha megölünk vagy bemegy az ellenség, akkor remaining-- és az élet is....
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(canSpawn && gm.NeedToSpawn > 0)
         {
-            GameObject enemy = ObjectPooler.Instance.Get("Enemy", Fight_Grid_Manager.Instance.PathVectors[0], Quaternion.identity);
-            enemy.GetComponent<Enemy>().Index = 0;
+            // SPAWN
+            gm.NeedToSpawn--;
+            SpawnRandom();
+            StartCoroutine(Wait(timeBetweenSpawns));
         }
     }
 
-    void FixedUpdate()
+    private void SpawnRandom()
     {
+        // TODO: máshogyan sorsoljon ellenfeleket!
+
+        int random = Random.Range(0, 2);
+        switch(random)
+        {
+            case 0:
+                GameObject enemy = ObjectPooler.Instance.Get("Knight", fgm.PathVectors[0], Quaternion.identity);
+                enemy.GetComponent<Knight>().Index = 0;
+                break;
+            case 1:
+                GameObject enemy2 = ObjectPooler.Instance.Get("Peasant", fgm.PathVectors[0], Quaternion.identity);
+                enemy2.GetComponent<Peasant>().Index = 0;
+                break;
+        }
+    }
+
+    IEnumerator Wait(float time)
+    {
+        canSpawn = false;
+        yield return new WaitForSeconds(time);
+        canSpawn = true;
     }
 }
