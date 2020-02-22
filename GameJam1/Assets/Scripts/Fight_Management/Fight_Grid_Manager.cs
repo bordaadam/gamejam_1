@@ -45,7 +45,7 @@ public class Fight_Grid_Manager : MonoBehaviour
     private void GeneratePath()
     {
         Debug.Log($"A tömb: {grids.GetLength(0)},{grids.GetLength(1)}");
-        int startX = Random.Range(0, grids.GetLength(0)), startY = 0;
+        int startX = 0, startY = 0;
         int endX = grids.GetLength(0)-1, endY = grids.GetLength(1)-1;
         Debug.Log($"startX: {startX}, startY: {startY}, endX: {endX}, endY: {endY}");
         MarkAsPath(startX, startY);
@@ -57,7 +57,7 @@ public class Fight_Grid_Manager : MonoBehaviour
         Debug.Log($"xDiff: {xDiff}, yDiff: {yDiff}");
         Debug.Log($"currentX: {currentX}, currentY: {currentY}");
 
-        while((currentX != endX) && (currentY != endY))
+        while((currentX != endX) || (currentY != endY))
         {
             int random = Random.Range(0, 2);
             Debug.Log("Erre megy a random: " + random);
