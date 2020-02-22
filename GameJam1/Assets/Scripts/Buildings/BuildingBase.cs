@@ -10,6 +10,12 @@ public abstract class BuildingBase : MonoBehaviour
     protected SphereCollider sphereCollider;
     protected bool canShoot = true;
 
+    [Space]
+    [Header("Resources to build")]
+    [SerializeField] protected int wood;
+    [SerializeField] protected int stone;
+    [SerializeField] protected int humanResources;
+
     protected void Update()
     {
         if (canShoot && target != null)
