@@ -76,20 +76,32 @@ public class UI_Handler : MonoBehaviour
     }
     public void NextBuilding()
     {
-        GameObject.Destroy(currentlyInstantiated);
-        StepSelectionIndex(true);
-        UpdateInfo();
+        if(!isBuildingMode)
+        {
+            GameObject.Destroy(currentlyInstantiated);
+            StepSelectionIndex(true);
+            UpdateInfo();
+        }
     }
     public void PrevBuilding()
     {
-        GameObject.Destroy(currentlyInstantiated);
-        StepSelectionIndex(false);
-        UpdateInfo();
+        if(!isBuildingMode)
+        {
+            GameObject.Destroy(currentlyInstantiated);
+            StepSelectionIndex(false);
+            UpdateInfo();
+        }
     }
 
     public void StartBuilding()
     {
-        isBuildingMode = true;
-        gameObject.GetComponent<GridClickHandler>().InstantiateGhost();
+        if(!isBuildingMode)
+        {
+            isBuildingMode = true;
+            gameObject.GetComponent<GridClickHandler>().InstantiateGhost();
+        }else
+        {
+            
+        }
     }
 }

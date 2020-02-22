@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum structureType {NOTHING, WOOD, WOOD_TOWER, WOOD_GATHERER, WOOD_PROCESSER, PATH,TOWER_BUILD_GRID}
+public enum structureType {NOTHING, WOOD, WOOD_TOWER, WOOD_GATHERER, WOOD_PROCESSER, PATH,TOWER_BUILD_GRID,STONE,INNOCENT_HUMAN,STONE_GATHERER,STONE_PROCESSOR}
 
 public class GameGrid : MonoBehaviour
 {

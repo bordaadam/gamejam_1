@@ -1419,8 +1419,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x_size: 10
   y_size: 10
-  woodPercentage: 10
-  woodColor: {r: 0.735849, g: 0.40392157, b: 0, a: 1}
+  resProps:
+  - name: Forest
+    percentage: 5
+    color: {r: 0.7169812, g: 0.4412164, b: 0, a: 1}
+    type: 1
+  - name: Stone
+    percentage: 5
+    color: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
+    type: 7
+  - name: Innocent Humans
+    percentage: 1
+    color: {r: 0.8784314, g: 0.8117647, b: 0.76862746, a: 1}
+    type: 8
   grid: {fileID: 1772780488288084621, guid: 5c5cb9e03be5fa6238070b71b1414d11, type: 3}
 --- !u!4 &1576232049
 Transform:
@@ -1475,7 +1486,7 @@ MonoBehaviour:
     description: This is a cheap and easy to assemble defensive structure. Kobolds
       usually inhabit it and vigorously throw javelins at any intruder who is foolish
       enough to get near.
-  - modell: {fileID: 2774355672327492301, guid: 430dd892333e6b0ad8a39b9f963fe7c5,
+  - modell: {fileID: 8151972442363187635, guid: d7c8dcb242a00b835ae66d8493976f63,
       type: 3}
     cameraOffset: {x: 0, y: -2, z: 10}
     instantiateOffset: {x: 0, y: 0.51, z: 0}
