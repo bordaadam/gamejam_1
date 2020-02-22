@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1137525976890770131}
   - component: {fileID: 8906758077283746769}
   - component: {fileID: 4986858729534373880}
+  - component: {fileID: -5224613312216926055}
   m_Layer: 0
   m_Name: Peasant
   m_TagString: Untagged
@@ -112,3 +113,19 @@ MonoBehaviour:
   movementSpeed: 3
   tag: Peasant
   damage: 5
+--- !u!54 &-5224613312216926055
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7621114129856519584}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
