@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1593750730427193778}
   m_Layer: 0
   m_Name: road-horizontal
-  m_TagString: Untagged
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 61d1a00659b1e93f8b267a0450f37dfd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4bc2826149b09c244b8d6b9f5ac77340, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54418c764346616c093f7913ada88fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0}
+  myGrid: {fileID: 0}
 --- !u!1 &6138820465012092448
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +108,7 @@ GameObject:
   - component: {fileID: 4290188264727443072}
   m_Layer: 0
   m_Name: Road
-  m_TagString: Untagged
+  m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

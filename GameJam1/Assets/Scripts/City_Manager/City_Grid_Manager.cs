@@ -21,7 +21,7 @@ public class City_Grid_Manager : MonoBehaviour
 
     public GameObject grid;
 
-    private GameObject[,] grids;
+    public GameObject[,] grids;
     private System.Random random = new System.Random();
 
     void MakeField()
@@ -34,6 +34,8 @@ public class City_Grid_Manager : MonoBehaviour
                 grids[i,j].GetComponent<Renderer>().material.SetColor("_Color",Color.green);
                 grids[i,j].GetComponent<GameGrid>().pos = new Vector2(i,j);
                 grids[i,j].GetComponent<GameGrid>().structure = structureType.NOTHING;
+                grids[i,j].GetComponent<GameGrid>().my_cgm = this;
+                grids[i,j].GetComponent<GameGrid>().my_fgm = null;
             }
         }
     }
@@ -46,11 +48,12 @@ public class City_Grid_Manager : MonoBehaviour
 
             while(typeTileCount > 0)
             {
-                GameObject gridCell = grids[random.Next(0,y_size),random.Next(0,x_size)];
+                GameObject gridCell = grids[random.Next(0,x_size),random.Next(0,y_size)];
                 GameGrid gridCellType = gridCell.GetComponent<GameGrid>();
                 if(gridCellType.structure == structureType.NOTHING)
                 {
                     gridCellType.structure = rp.type;
+                    //gridCellType.objectsHeld[0] = 
                     gridCell.GetComponent<Renderer>().material.SetColor("_Color",rp.color);
                     typeTileCount--;
                 }else
@@ -64,7 +67,7 @@ public class City_Grid_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grids = new GameObject[y_size,x_size];
+        grids = new GameObject[x_size,y_size];
         MakeField();
         InstallResources();
     }

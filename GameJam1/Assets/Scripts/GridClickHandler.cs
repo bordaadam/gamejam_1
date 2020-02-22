@@ -68,7 +68,6 @@ public class GridClickHandler : MonoBehaviour
                 {
                     if(uiHandler.isBuildingMode && hit.transform.gameObject.GetComponent<GameGrid>().structure == uiHandler.getCurrentlySelectedModell().canBeBuiltOn)
                     {
-                        //TODO: Build mode and building type check
                         GameObject.Destroy(ghost);
                         uiHandler.isBuildingMode = false;
                         hit.transform.gameObject.GetComponent<GameGrid>().structure = uiHandler.getCurrentlySelectedModell().ownType;
@@ -76,6 +75,17 @@ public class GridClickHandler : MonoBehaviour
                         tmp.transform.rotation = Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation);
                         tmp.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;
                         hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[1] = tmp;
+                        //Debug.Log(hit.transform.gameObject.GetComponent<GameGrid>().pos.ToString() + " | " + hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[1].ToString());
+                        if(uiHandler.getCurrentlySelectedModell().ownType == structureType.PATH)
+                        {
+                            gameObject.GetComponent<PathManager>().paths.Add(tmp);
+                            tmp.transform.GetChild(0).GetComponent<PathLogic>().myGrid = hit.transform.gameObject;
+                            tmp.transform.GetChild(0).GetComponent<PathLogic>().pos = hit.transform.gameObject.GetComponent<GameGrid>().pos;
+                        }
+                        foreach(GameObject go in gameObject.GetComponent<PathManager>().paths)
+                        {
+                            go.transform.GetChild(0).GetComponent<PathLogic>().UpdateNeighbours();
+                        }
                     }
 
                 }catch
