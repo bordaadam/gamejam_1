@@ -8,6 +8,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float movementSpeed;
     private bool reachedPoint = false;
     private int index = 0;
+    public int Index
+    {
+        get
+        {
+            return index;
+        }
+
+        set
+        {
+            index = value;
+        }
+    }
 
     void Start()
     {
@@ -24,7 +36,8 @@ public class Enemy : MonoBehaviour
             index++;
             if (index > manager.PathVectors.Count - 1) // If we reached the final destination
             {
-                Destroy(this);
+                //TODO: put back
+                ObjectPooler.Instance.Put("Enemy", gameObject);
             }
         }
     }
