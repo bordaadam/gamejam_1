@@ -9,14 +9,32 @@ public class Fight_Grid_Manager : MonoBehaviour
     [SerializeField] private int wideness, depth;
     [SerializeField] private Color pathColor;
     private GameObject parent;
+    private static Fight_Grid_Manager _instance;
+
+    public List<Vector3> PathVectors
+    {
+        get;
+        private set;
+    }
+
+    public static Fight_Grid_Manager Instance
+    {
+        get { return _instance; }
+    }
 
     void Awake()
     {
-        parent = GameObject.Find("FightLevel");
+        if(_instance == null)
+        {
+            _instance = this;
+        }
+
+        PathVectors = new List<Vector3>();
     }
 
     void Start()
     {
+        parent = GameObject.Find("FightLevel");
         grids = GenerateGrids(wideness, depth);
         GeneratePath();
     }
@@ -49,6 +67,7 @@ public class Fight_Grid_Manager : MonoBehaviour
         int endX = grids.GetLength(0)-1, endY = grids.GetLength(1)-1;
         Debug.Log($"startX: {startX}, startY: {startY}, endX: {endX}, endY: {endY}");
         MarkAsPath(startX, startY);
+        PathVectors.Add(new Vector2(startX, startY));
 
         int xDiff = (int)Mathf.Abs(startX - endX);
         int yDiff = (int)Mathf.Abs(endY - startY);
@@ -90,6 +109,9 @@ public class Fight_Grid_Manager : MonoBehaviour
     {
         grids[i, j].GetComponent<Renderer>().material.color = pathColor;
         grids[i, j].GetComponent<GameGrid>().structure = structureType.PATH;
+        grids[i, j].transform.position = new Vector3(grids[i, j].transform.position.x, grids[i, j].transform.position.y - 1, grids[i, j].transform.position.z);
+        Vector3 trans = new Vector3(grids[i, j].transform.position.x, -1, grids[i, j].transform.position.y);
+        PathVectors.Add(grids[i, j].transform.position);
     }
 
 }
