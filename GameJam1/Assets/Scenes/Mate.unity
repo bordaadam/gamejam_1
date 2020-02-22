@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 1576232049}
   - component: {fileID: 1576232048}
   m_Layer: 0
-  m_Name: Grid_Manager
+  m_Name: Game_Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,6 +244,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x_size: 10
   y_size: 10
+  woodPercentage: 10
+  woodColor: {r: 0.735849, g: 0.40392157, b: 0, a: 1}
   grid: {fileID: 1772780488288084621, guid: 5c5cb9e03be5fa6238070b71b1414d11, type: 3}
 --- !u!4 &1576232049
 Transform:
