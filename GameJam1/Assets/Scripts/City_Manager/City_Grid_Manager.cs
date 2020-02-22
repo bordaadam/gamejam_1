@@ -7,9 +7,17 @@ public class City_Grid_Manager : MonoBehaviour
     public int x_size;
     public int y_size;
 
-    public float woodPercentage;
+    [System.Serializable]
+    public struct ResourceProperties{
+        public string name;
+        public float percentage;
 
-    public Color woodColor;
+        public Color color;
+        public structureType type;
+
+    }
+
+    public ResourceProperties[] resProps;
 
     public GameObject grid;
 
@@ -32,20 +40,23 @@ public class City_Grid_Manager : MonoBehaviour
 
     void InstallResources()
     {
-        int woodTileCount = (int)Mathf.Floor((float)x_size * (float)y_size * woodPercentage/100.0f);
-
-        while(woodTileCount > 0)
+        foreach(ResourceProperties rp in resProps)
         {
-            GameObject gridCell = grids[random.Next(0,y_size),random.Next(0,x_size)];
-            GameGrid gridCellType = gridCell.GetComponent<GameGrid>();
-            if(gridCellType.structure == structureType.NOTHING)
+            int typeTileCount = (int)Mathf.Floor((float)x_size * (float)y_size * rp.percentage/100.0f);
+
+            while(typeTileCount > 0)
             {
-                gridCellType.structure = structureType.WOOD;
-                gridCell.GetComponent<Renderer>().material.SetColor("_Color",woodColor);
-                woodTileCount--;
-            }else
-            {
-                continue;
+                GameObject gridCell = grids[random.Next(0,y_size),random.Next(0,x_size)];
+                GameGrid gridCellType = gridCell.GetComponent<GameGrid>();
+                if(gridCellType.structure == structureType.NOTHING)
+                {
+                    gridCellType.structure = rp.type;
+                    gridCell.GetComponent<Renderer>().material.SetColor("_Color",rp.color);
+                    typeTileCount--;
+                }else
+                {
+                    continue;
+                }
             }
         }
     }
