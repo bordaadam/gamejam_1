@@ -109,6 +109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  movementSpeed: 4
+  movementSpeed: 2
   tag: Knight
   damage: 20
