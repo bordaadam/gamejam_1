@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class UI_Handler : MonoBehaviour
 {
+    public bool isBuildingMode = false;
     [System.Serializable]
     public struct BuildingStruct{
-        public GameObject modell;
-        public Vector3 cameraOffset;
-
-        public structureType canBeBuiltOn;
-        public string name;
-        public string description;
+        public GameObject modell; //the moddel of the given type
+        public Vector3 cameraOffset; //The offset vector from the inforender camera
+        public Vector3 instantiateOffset;//The vector used to offset the model when instantiating for gameplay and not info render
+        public Vector3 instantiateScale;//The vector used to scale the model when instantiating for gameplay and not info render
+        public Vector3 instantiateRotation;//The vector used for rotation when instantiating for gamplay
+        public structureType ownType;//The entry's own type
+        public structureType canBeBuiltOn; //The grid-type that this type of building can be built on
+        public string name; //the name of the building
+        public string description; //the description of the building
     }
 
     public GameObject buildPanel;
@@ -22,6 +26,11 @@ public class UI_Handler : MonoBehaviour
     public Text nameText;
     public Text description;
     public Camera objectRenderCamera;
+
+    public BuildingStruct getCurrentlySelectedModell()
+    {
+        return buildingStruct[selectionIndex];
+    }
 
     private int selectionIndex = 0;
     private GameObject currentlyInstantiated;
@@ -80,6 +89,7 @@ public class UI_Handler : MonoBehaviour
 
     public void StartBuilding()
     {
-        
+        isBuildingMode = true;
+        gameObject.GetComponent<GridClickHandler>().InstantiateGhost();
     }
 }

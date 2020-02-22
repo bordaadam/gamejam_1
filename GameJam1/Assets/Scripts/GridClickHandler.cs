@@ -4,17 +4,59 @@ using UnityEngine;
 
 public class GridClickHandler : MonoBehaviour
 {
-    public GameObject path;
-    public GameObject Wood_Gatherer;
-    // Start is called before the first frame update
-    void Start()
+    private UI_Handler uiHandler;
+    private GameObject ghost;
+    private Color ghostOriginalColor;
+
+    public void InstantiateGhost()
     {
-        
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 2f;       //we want min distance from the camera
+        Vector3 objectPos = Camera.main.ScreenToWorldPoint(mousePos);
+        ghost = Instantiate(uiHandler.getCurrentlySelectedModell().modell, objectPos, Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation));
+        ghost.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;
+        ghostOriginalColor = ghost.transform.GetChild(0).GetComponent<Renderer>().material.GetColor("_Color");
+    }
+    private void Start() {
+        uiHandler = gameObject.GetComponent<UI_Handler>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(uiHandler.isBuildingMode)
+        {      
+            RaycastHit  hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 vect = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 2f);
+            ghost.transform.position =  Camera.main.ScreenToWorldPoint(vect);
+            if (Physics.Raycast(ray, out hit)) //handle ghost
+            {
+                GameObject hitGO = hit.transform.gameObject;
+                try{//We expect that the hit object has GameGrid component
+                    if(hitGO.GetComponent<GameGrid>().structure == uiHandler.getCurrentlySelectedModell().canBeBuiltOn)
+                    {
+                        ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",ghostOriginalColor);
+                        ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                    }else
+                    {
+                        ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",Color.red);
+                        ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                    }
+                }catch{
+
+                }
+            }else
+            {
+                ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",Color.red);
+                ghost.transform.position =  Camera.main.ScreenToWorldPoint(vect);
+            }
+            if(Input.GetMouseButtonUp(1))//cancel building mode
+            {
+                GameObject.Destroy(ghost);
+                uiHandler.isBuildingMode = false;
+            }
+        }
         if (Input.GetMouseButtonUp(0))
         {
             RaycastHit  hit;
@@ -22,29 +64,18 @@ public class GridClickHandler : MonoBehaviour
                   
             if (Physics.Raycast(ray, out hit))
             {
-                //Wood_Gatherer placement
                 try //We expect to have a grid component attached to the hit object
                 {
-                    if(hit.transform.gameObject.GetComponent<GameGrid>().structure == structureType.WOOD)
+                    if(uiHandler.isBuildingMode && hit.transform.gameObject.GetComponent<GameGrid>().structure == uiHandler.getCurrentlySelectedModell().canBeBuiltOn)
                     {
                         //TODO: Build mode and building type check
-                        hit.transform.gameObject.GetComponent<GameGrid>().structure = structureType.WOOD_GATHERER;
-                        GameObject tmp = Instantiate(Wood_Gatherer,new Vector3(hit.transform.position.x,hit.transform.position.y + 0.51f,hit.transform.position.z),Quaternion.identity);
+                        GameObject.Destroy(ghost);
+                        uiHandler.isBuildingMode = false;
+                        hit.transform.gameObject.GetComponent<GameGrid>().structure = uiHandler.getCurrentlySelectedModell().ownType;
+                        GameObject tmp = Instantiate(uiHandler.getCurrentlySelectedModell().modell,hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset,Quaternion.identity);
+                        tmp.transform.rotation = Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation);
+                        tmp.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;
                         hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[1] = tmp;
-                        //hit.transform.gameObject.GetComponent<Renderer>().material.SetColor("_Color",Color.red);
-                    }
-
-                    //Path placement
-                    if(hit.transform.gameObject.GetComponent<GameGrid>().structure == structureType.NOTHING)
-                    {
-                        //TODO: Build mode and building type check
-                        hit.transform.gameObject.GetComponent<GameGrid>().structure = structureType.PATH;
-                        GameObject tmp = Instantiate(path,new Vector3(hit.transform.position.x,hit.transform.position.y + 0.51f,hit.transform.position.z),Quaternion.identity);
-                        Vector3 temp = transform.rotation.eulerAngles;
-                        temp.x = 90.0f;
-                        tmp.transform.rotation = Quaternion.Euler(temp);
-                        hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[1] = tmp;
-                        //hit.transform.gameObject.GetComponent<Renderer>().material.SetColor("_Color",Color.yellow);
                     }
 
                 }catch
