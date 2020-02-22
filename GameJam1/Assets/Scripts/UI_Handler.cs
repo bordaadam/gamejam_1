@@ -13,6 +13,11 @@ public class UI_Handler : MonoBehaviour
         public Vector3 instantiateOffset;//The vector used to offset the model when instantiating for gameplay and not info render
         public Vector3 instantiateScale;//The vector used to scale the model when instantiating for gameplay and not info render
         public Vector3 instantiateRotation;//The vector used for rotation when instantiating for gamplay
+        public Vector3 presentationScale;
+         public Vector3 presentationRotation;
+        public bool presRotationOnX;
+        public bool presRotationOnY;
+        public bool presRotationOnZ;
         public structureType ownType;//The entry's own type
         public structureType canBeBuiltOn; //The grid-type that this type of building can be built on
         public string name; //the name of the building
@@ -40,8 +45,20 @@ public class UI_Handler : MonoBehaviour
         nameText.text = buildingStruct[selectionIndex].name;
         description.text = buildingStruct[selectionIndex].description;
         currentlyInstantiated = Instantiate(buildingStruct[selectionIndex].modell,objectRenderCamera.transform.position + buildingStruct[selectionIndex].cameraOffset,Quaternion.identity);
-        currentlyInstantiated.GetComponent<RotateObject>().y_axis_speed_multiplier = 1;
-        currentlyInstantiated.transform.localScale = new Vector3(1,1,1);
+        if(buildingStruct[selectionIndex].presRotationOnX)
+        {
+            currentlyInstantiated.GetComponent<RotateObject>().x_axis_speed_multiplier = 1;
+        }
+        if(buildingStruct[selectionIndex].presRotationOnY)
+        {
+            currentlyInstantiated.GetComponent<RotateObject>().y_axis_speed_multiplier = 1;
+        }
+        if(buildingStruct[selectionIndex].presRotationOnZ)
+        {
+            currentlyInstantiated.GetComponent<RotateObject>().z_axis_speed_multiplier = 1;
+        }
+        currentlyInstantiated.transform.localScale = buildingStruct[selectionIndex].presentationScale;
+        currentlyInstantiated.transform.rotation = Quaternion.Euler(buildingStruct[selectionIndex].presentationRotation);
         buildPanel.SetActive(true);
     }
 
