@@ -109,6 +109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  movementSpeed: 2
+  movementSpeed: 3
   tag: Peasant
   damage: 5
