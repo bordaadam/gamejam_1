@@ -12,6 +12,7 @@ public class Knight : EnemyBase
     void Start()
     {
         fgm = Fight_Grid_Manager.Instance;
+        gm = GameManager.Instance;
     }
 
 }

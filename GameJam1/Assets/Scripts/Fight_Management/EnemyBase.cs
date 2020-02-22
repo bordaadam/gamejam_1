@@ -8,8 +8,10 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected float currentHealth;
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected string tag;
+    [SerializeField] protected float damage;
 
     protected Fight_Grid_Manager fgm;
+    protected GameManager gm;
     protected bool reachedPoint = false;
     public int Index { get; set; } 
 
@@ -23,7 +25,9 @@ public abstract class EnemyBase : MonoBehaviour
             Index++;
             if (Index > fgm.PathVectors.Count - 1) // If we reached the final destination
             {
-                //TODO: put back
+                // ENEMY REACHED THE FINAL TILE!
+                gm.CurrentHealth -= damage;
+                gm.RemainingEnemy--;
                 ObjectPooler.Instance.Put(tag, gameObject);
             }
         }

@@ -12,6 +12,7 @@ public class Peasant : EnemyBase
     void Start()
     {
         fgm = Fight_Grid_Manager.Instance;
+        gm = GameManager.Instance;
     }
 
 }
