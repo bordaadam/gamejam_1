@@ -67,7 +67,7 @@ public class Fight_Grid_Manager : MonoBehaviour
         int endX = grids.GetLength(0)-1, endY = grids.GetLength(1)-1;
         Debug.Log($"startX: {startX}, startY: {startY}, endX: {endX}, endY: {endY}");
         MarkAsPath(startX, startY);
-        PathVectors.Add(new Vector2(startX, startY));
+        PathVectors.Add(new Vector3(startX, -1, startY));
 
         int xDiff = (int)Mathf.Abs(startX - endX);
         int yDiff = (int)Mathf.Abs(endY - startY);

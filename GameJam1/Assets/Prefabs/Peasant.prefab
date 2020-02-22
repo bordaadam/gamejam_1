@@ -111,3 +111,4 @@ MonoBehaviour:
   currentHealth: 0
   movementSpeed: 2
   tag: Peasant
+  damage: 5
