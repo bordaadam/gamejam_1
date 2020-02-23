@@ -32,6 +32,15 @@ public class UI_Handler : MonoBehaviour
     public Text description;
     public Camera objectRenderCamera;
 
+    public GameObject lightObject;
+
+    public Image healthImage;
+    public Text healthText;
+    public Text[] resources; //wood,stone,humans
+    public int populationCount = 200000;
+
+    private GameManager gameManager;
+
     public BuildingStruct getCurrentlySelectedModell()
     {
         return buildingStruct[selectionIndex];
@@ -39,6 +48,18 @@ public class UI_Handler : MonoBehaviour
 
     private int selectionIndex = 0;
     private GameObject currentlyInstantiated;
+    private GameObject lo;
+
+    private void Start() {
+        gameManager = gameObject.GetComponent<GameManager>();
+        UpdateHealthUI();
+    }
+    private void Update() {
+        resources[0].text = gameManager.Wood.ToString();
+        resources[1].text = gameManager.Stone.ToString();
+        resources[2].text = gameManager.HumanResources.ToString();
+        UpdateHealthUI();
+    }
 
     public void UpdateInfo()
     {
@@ -59,6 +80,13 @@ public class UI_Handler : MonoBehaviour
         }
         currentlyInstantiated.transform.localScale = buildingStruct[selectionIndex].presentationScale;
         currentlyInstantiated.transform.rotation = Quaternion.Euler(buildingStruct[selectionIndex].presentationRotation);
+        //currentlyInstantiated.AddComponent<Light>();
+        if(lightObject != null && currentlyInstantiated.transform.childCount > 1)
+        {
+            lo = Instantiate(lightObject,objectRenderCamera.transform.position + new Vector3(0f,2f,0),Quaternion.identity);
+            lo.transform.LookAt(currentlyInstantiated.transform);
+            //lo.transform.parent = currentlyInstantiated.transform;
+        }
         buildPanel.SetActive(true);
     }
 
@@ -86,6 +114,10 @@ public class UI_Handler : MonoBehaviour
         {
             buildPanel.SetActive(false);
             GameObject.Destroy(currentlyInstantiated);
+            if(lo != null)
+            {
+                GameObject.Destroy(lo);
+            }
         }else
         {
             UpdateInfo();
@@ -97,6 +129,10 @@ public class UI_Handler : MonoBehaviour
         {
             GameObject.Destroy(currentlyInstantiated);
             StepSelectionIndex(true);
+            if(lo != null)
+            {
+                GameObject.Destroy(lo);
+            }
             UpdateInfo();
         }
     }
@@ -106,6 +142,10 @@ public class UI_Handler : MonoBehaviour
         {
             GameObject.Destroy(currentlyInstantiated);
             StepSelectionIndex(false);
+            if(lo != null)
+            {
+                GameObject.Destroy(lo);
+            }
             UpdateInfo();
         }
     }
@@ -120,5 +160,10 @@ public class UI_Handler : MonoBehaviour
         {
             
         }
+    }
+    public void UpdateHealthUI()
+    {
+        healthImage.fillAmount = gameManager.CurrentHealth / gameManager.MaxHealth;
+        healthText.text = "Population: " + Mathf.Floor(populationCount * healthImage.fillAmount).ToString();
     }
 }
