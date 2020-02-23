@@ -16,6 +16,22 @@ MonoBehaviour:
   y_axis_speed_multiplier: 0
   z_axis_speed_multiplier: 0
   speed: 100
+--- !u!114 &5442127494683051366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395729943127045311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 950b53cde18ecc53ca037a4d3240d0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateTime: 2
+  amountGenerated: 1
+  myType: 3
+  myPos: {x: 0, y: 0}
 --- !u!1001 &5917372185824325046
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class GridClickHandler : MonoBehaviour
     public void InstantiateGhost()
     {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 2f;       //we want min distance from the camera
+        mousePos.z = 10f;       //we want min distance from the camera
         Vector3 objectPos = Camera.main.ScreenToWorldPoint(mousePos);
         ghost = Instantiate(uiHandler.getCurrentlySelectedModell().modell, objectPos, Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation));
         ghost.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;
@@ -40,7 +40,7 @@ public class GridClickHandler : MonoBehaviour
         {      
             RaycastHit  hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 vect = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 2f);
+            Vector3 vect = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f);
             ghost.transform.position =  Camera.main.ScreenToWorldPoint(vect);
             if (Physics.Raycast(ray, out hit)) //handle ghost
             {
@@ -127,6 +127,10 @@ public class GridClickHandler : MonoBehaviour
                             gameObject.GetComponent<PathManager>().paths.Add(tmp);
                             tmp.transform.GetChild(0).GetComponent<PathLogic>().myGrid = hit.transform.gameObject;
                             tmp.transform.GetChild(0).GetComponent<PathLogic>().pos = hit.transform.gameObject.GetComponent<GameGrid>().pos;
+                        }else
+                        {
+                            tmp.GetComponent<BuildingResourceHandler>().enabled = true;
+                            tmp.GetComponent<BuildingResourceHandler>().myPos = hit.transform.gameObject.GetComponent<GameGrid>().pos;
                         }
                         foreach(GameObject go in gameObject.GetComponent<PathManager>().paths)
                         {
