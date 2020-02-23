@@ -59,7 +59,7 @@ public abstract class BuildingBase : MonoBehaviour
 
     protected void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.blue;
         if(target != null)
             Gizmos.DrawLine(transform.position, target.transform.position);
     }
