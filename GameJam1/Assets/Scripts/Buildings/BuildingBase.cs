@@ -7,7 +7,7 @@ public abstract class BuildingBase : MonoBehaviour
     [SerializeField] protected float shootingTime;
     [SerializeField] protected float damage;
     [SerializeField] protected GameObject target;
-    protected SphereCollider sphereCollider;
+    protected BoxCollider collider;
     protected bool canShoot = true;
     [SerializeField] protected string tag;
     protected GameObject go;
@@ -39,6 +39,7 @@ public abstract class BuildingBase : MonoBehaviour
 
     protected void OnTriggerExit(Collider col)
     {
+        Debug.Log("Kilpett a targetem!");
         target = null;
     }
 
@@ -52,9 +53,17 @@ public abstract class BuildingBase : MonoBehaviour
 
     protected private void Shoot()
     {
+        if (!target.activeSelf)
+        {
+            target = null;
+            return;
+        }
+
+        PlaySound();
+
         go = ObjectPooler.Instance.Get(tag, shootingPoint.transform.position, Quaternion.identity);
 
-        go.GetComponent<Rigidbody>().AddForce((target.transform.position - shootingPoint.transform.position)*shootingSpeed, ForceMode.Impulse);
+        go.GetComponent<Rigidbody>().AddForce((target.transform.position - shootingPoint.transform.position), ForceMode.Impulse);
 
         if (target.GetComponent<Peasant>())
         {
@@ -72,4 +81,6 @@ public abstract class BuildingBase : MonoBehaviour
         if(target != null)
             Gizmos.DrawLine(transform.position, target.transform.position);
     }
+
+    protected abstract void PlaySound();
 }

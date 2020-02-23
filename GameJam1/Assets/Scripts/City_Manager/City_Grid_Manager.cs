@@ -19,6 +19,8 @@ public class City_Grid_Manager : MonoBehaviour
         public Color color;
         public structureType type;
 
+        public GameObject sprite;
+
     }
 
     public ResourceProperties[] resProps;
@@ -41,7 +43,7 @@ public class City_Grid_Manager : MonoBehaviour
             for(int j = 0; j < y_size; j++)
             {
                 grids[i,j] = Instantiate(grid, new Vector3(i+x_offset,0f,j+y_offset),Quaternion.identity);
-                grids[i,j].GetComponent<Renderer>().material.SetColor("_Color",baseColor);
+                //grids[i,j].GetComponent<Renderer>().material.SetColor("_Color",baseColor);
                 grids[i,j].GetComponent<GameGrid>().pos = new Vector2(i,j);
                 grids[i,j].GetComponent<GameGrid>().structure = structureType.NOTHING;
                 grids[i,j].GetComponent<GameGrid>().my_cgm = this;
@@ -52,9 +54,9 @@ public class City_Grid_Manager : MonoBehaviour
                     grids[i,j].GetComponent<GameGrid>().structure = structureType.PORTAL;
                     grids[i,j].GetComponent<GameGrid>().objectsHeld[1] = portalInstantiated;
                 }
-                //GameObject tmp = Instantiate(grassVariants[random.Next(grassVariants.Length)],grids[i,j].transform.position + new Vector3(0f,0.51f,0f), Quaternion.Euler(new Vector3(270f,0f,0f)));
-                //tmp.transform.localScale = new Vector3(0.78f,0.78f,1f);
-                //grids[i,j].GetComponent<GameGrid>().objectsHeld[0] = tmp;
+                GameObject tmp = Instantiate(grassVariants[random.Next(grassVariants.Length)],grids[i,j].transform.position + new Vector3(0f,0.51f,0f), Quaternion.Euler(new Vector3(270f,0f,0f)));
+                tmp.transform.localScale = new Vector3(0.78f,0.78f,1f);
+                grids[i,j].GetComponent<GameGrid>().objectsHeld[0] = tmp;
             }
         }
     }
@@ -72,7 +74,11 @@ public class City_Grid_Manager : MonoBehaviour
                 if(gridCellType.structure == structureType.NOTHING)
                 {
                     gridCellType.structure = rp.type;
-                    gridCell.GetComponent<Renderer>().material.SetColor("_Color",rp.color);
+                    //gridCell.GetComponent<Renderer>().material.SetColor("_Color",rp.color);
+                    GameObject.Destroy(gridCellType.objectsHeld[0]);
+                    GameObject tmp = Instantiate(rp.sprite,gridCell.transform.position + new Vector3(0f,0.51f,0f), Quaternion.Euler(new Vector3(270f,0f,0f)));
+                    tmp.transform.localScale = new Vector3(0.78f,0.78f,1f);
+                    gridCellType.objectsHeld[0] = tmp;
                     typeTileCount--;
                 }else
                 {

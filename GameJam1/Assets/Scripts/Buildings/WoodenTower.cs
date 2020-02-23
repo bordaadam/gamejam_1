@@ -2,11 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class WoodenTower : BuildingBase
 {
-   void Start()
+
+    private AudioSource source;
+
+    void Start()
     {
-        sphereCollider = GetComponent<SphereCollider>();
+        source = GetComponent<AudioSource>();
+        collider = GetComponent<BoxCollider>();
+    }
+
+    protected override void PlaySound()
+    {
+        source.Play();
     }
 
 }

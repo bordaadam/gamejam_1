@@ -110,7 +110,7 @@ public class UI_Handler : MonoBehaviour
     }
     public void onBuildButtonClicked()
     {
-        if(buildPanel.activeInHierarchy)
+        if(buildPanel.activeInHierarchy && !isBuildingMode)
         {
             buildPanel.SetActive(false);
             GameObject.Destroy(currentlyInstantiated);
@@ -118,7 +118,7 @@ public class UI_Handler : MonoBehaviour
             {
                 GameObject.Destroy(lo);
             }
-        }else
+        }else if(!buildPanel.activeInHierarchy)
         {
             UpdateInfo();
         }
