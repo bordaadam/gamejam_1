@@ -22,6 +22,9 @@ public class UI_Handler : MonoBehaviour
         public structureType canBeBuiltOn; //The grid-type that this type of building can be built on
         public string name; //the name of the building
         public string description; //the description of the building
+        public int woodCost;
+        public int stoneCost;
+        public int humanCost;
     }
 
     public GameObject buildPanel;

@@ -1,13 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Fight_Grid_Manager : MonoBehaviour
 {
     public GameObject[,] grids;
+
+    public GameObject portal;
     [SerializeField] private GameObject gridPrefab;
     [SerializeField] private int wideness, depth;
     [SerializeField] private Color pathColor;
+    [SerializeField] private Material[] grassVariants;
 
     public int GetWideness()
     {
@@ -46,6 +50,7 @@ public class Fight_Grid_Manager : MonoBehaviour
         parent = GameObject.Find("FightLevel");
         grids = GenerateGrids(wideness, depth);
         GeneratePath();
+        //PutGrass();
     }
 
     private GameObject[,] GenerateGrids(int w, int h) 
@@ -58,13 +63,19 @@ public class Fight_Grid_Manager : MonoBehaviour
             {
                 GameObject obj = Instantiate(gridPrefab, new Vector3(i, 0f, j), Quaternion.identity); // actual grid
                 obj.transform.parent = parent.transform;
+                int randomGrass = UnityEngine.Random.Range(0, 3); // [0-3]
+                obj.GetComponent<MeshRenderer>().material = grassVariants[randomGrass];
                 
                 
                 obj.GetComponent<GameGrid>().pos = new Vector2(i, j);
                 obj.GetComponent<GameGrid>().structure = structureType.TOWER_BUILD_GRID;
                 obj.GetComponent<GameGrid>().my_fgm = this;
                 obj.GetComponent<GameGrid>().my_cgm = null;
+
+                // Grass
                 tmp[i,j] = obj;
+
+
             }
         }
 
@@ -89,7 +100,7 @@ public class Fight_Grid_Manager : MonoBehaviour
 
         while((currentX != endX) || (currentY != endY))
         {
-            int random = Random.Range(0, 2);
+            int random = UnityEngine.Random.Range(0, 2);
             Debug.Log("Erre megy a random: " + random);
 
             if(random == 0)
@@ -113,6 +124,16 @@ public class Fight_Grid_Manager : MonoBehaviour
                 }
             }
         }
+
+        GameObject portalInstantiated = Instantiate(portal,grids[wideness-1,depth-1].transform.position + new Vector3(0f,0.75f,0f),Quaternion.identity);
+        grids[wideness-1,depth-1].GetComponent<GameGrid>().structure = structureType.PORTAL;
+        portalInstantiated.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+        portalInstantiated.transform.GetChild(2).localScale = new Vector3(0.1f,0.1f,0.1f);
+        if(grids[wideness-2,depth-1].transform.position.y == 0)
+        {
+            portalInstantiated.transform.rotation = Quaternion.Euler(new Vector3(0f,90f,0f));
+        }
+        grids[wideness-1,depth-1].GetComponent<GameGrid>().objectsHeld[1] = portalInstantiated;
 
     }
 

@@ -50,8 +50,11 @@ public class City_Grid_Manager : MonoBehaviour
                 grids[i,j].GetComponent<GameGrid>().my_fgm = null;
                 if(i == 0 && j == 0)
                 {
-                    portalInstantiated = Instantiate(portal,grids[i,j].transform.position + new Vector3(0f,0.51f,0f),Quaternion.identity);
+                    portalInstantiated = Instantiate(portal,grids[i,j].transform.position + new Vector3(0f,0.75f,0f),Quaternion.identity);
                     grids[i,j].GetComponent<GameGrid>().structure = structureType.PORTAL;
+                    portalInstantiated.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+                    portalInstantiated.transform.GetChild(2).localScale = new Vector3(0.1f,0.1f,0.1f);
+                    portalInstantiated.transform.rotation = Quaternion.Euler(new Vector3(0f,90f,0f));
                     grids[i,j].GetComponent<GameGrid>().objectsHeld[1] = portalInstantiated;
                 }
                 GameObject tmp = Instantiate(grassVariants[random.Next(grassVariants.Length)],grids[i,j].transform.position + new Vector3(0f,0.51f,0f), Quaternion.Euler(new Vector3(270f,0f,0f)));
