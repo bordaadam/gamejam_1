@@ -9,6 +9,7 @@ public class GridClickHandler : MonoBehaviour
     private Color ghostOriginalColor;
     private Material[] ghostOriginalMats;
     public Material errorMat;
+    private GameManager gameManager;
 
     public void InstantiateGhost()
     {
@@ -23,7 +24,7 @@ public class GridClickHandler : MonoBehaviour
             ghost.GetComponent<Collider>().enabled = false;
         }catch
         {
-            
+
         }
         if(uiHandler.getCurrentlySelectedModell().ownType != structureType.PATH)
         {
@@ -38,6 +39,7 @@ public class GridClickHandler : MonoBehaviour
     }
     private void Start() {
         uiHandler = gameObject.GetComponent<UI_Handler>();
+        gameManager = gameObject.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -117,32 +119,38 @@ public class GridClickHandler : MonoBehaviour
                 {
                     if(uiHandler.isBuildingMode && (hit.transform.gameObject.GetComponent<GameGrid>().structure == uiHandler.getCurrentlySelectedModell().canBeBuiltOn || (uiHandler.getCurrentlySelectedModell().ownType == structureType.PATH && hit.transform.gameObject.GetComponent<GameGrid>().structure == structureType.TOWER_BUILD_GRID)))
                     {
-                        GameObject.Destroy(ghost);
-                        uiHandler.isBuildingMode = false;
-                        hit.transform.gameObject.GetComponent<GameGrid>().structure = uiHandler.getCurrentlySelectedModell().ownType;
-                        if(hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0] != null)
+                        if(gameManager.Wood - uiHandler.getCurrentlySelectedModell().woodCost >= 0 && gameManager.Stone - uiHandler.getCurrentlySelectedModell().stoneCost >= 0 && gameManager.HumanResources - uiHandler.getCurrentlySelectedModell().humanCost >= 0)
                         {
-                            GameObject.Destroy(hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0]);
-                            hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0] = null;
-                        }
-                        GameObject tmp = Instantiate(uiHandler.getCurrentlySelectedModell().modell,hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset,Quaternion.identity);
-                        tmp.transform.rotation = Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation);
-                        tmp.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;
-                        hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[1] = tmp;
-                        //Debug.Log(hit.transform.gameObject.GetComponent<GameGrid>().pos.ToString() + " | " + hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[1].ToString());
-                        if(uiHandler.getCurrentlySelectedModell().ownType == structureType.PATH)
-                        {
-                            gameObject.GetComponent<PathManager>().paths.Add(tmp);
-                            tmp.transform.GetChild(0).GetComponent<PathLogic>().myGrid = hit.transform.gameObject;
-                            tmp.transform.GetChild(0).GetComponent<PathLogic>().pos = hit.transform.gameObject.GetComponent<GameGrid>().pos;
-                        }else
-                        {
-                            tmp.GetComponent<BuildingResourceHandler>().enabled = true;
-                            tmp.GetComponent<BuildingResourceHandler>().myPos = hit.transform.gameObject.GetComponent<GameGrid>().pos;
-                        }
-                        foreach(GameObject go in gameObject.GetComponent<PathManager>().paths)
-                        {
-                            go.transform.GetChild(0).GetComponent<PathLogic>().UpdateNeighbours();
+                            gameManager.Wood -= uiHandler.getCurrentlySelectedModell().woodCost;
+                            gameManager.Stone -= uiHandler.getCurrentlySelectedModell().stoneCost;
+                            gameManager.HumanResources -= uiHandler.getCurrentlySelectedModell().humanCost;
+                            GameObject.Destroy(ghost);
+                            uiHandler.isBuildingMode = false;
+                            hit.transform.gameObject.GetComponent<GameGrid>().structure = uiHandler.getCurrentlySelectedModell().ownType;
+                            if(hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0] != null)
+                            {
+                                GameObject.Destroy(hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0]);
+                                hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0] = null;
+                            }
+                            GameObject tmp = Instantiate(uiHandler.getCurrentlySelectedModell().modell,hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset,Quaternion.identity);
+                            tmp.transform.rotation = Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation);
+                            tmp.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;
+                            hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[1] = tmp;
+                            //Debug.Log(hit.transform.gameObject.GetComponent<GameGrid>().pos.ToString() + " | " + hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[1].ToString());
+                            if(uiHandler.getCurrentlySelectedModell().ownType == structureType.PATH)
+                            {
+                                gameObject.GetComponent<PathManager>().paths.Add(tmp);
+                                tmp.transform.GetChild(0).GetComponent<PathLogic>().myGrid = hit.transform.gameObject;
+                                tmp.transform.GetChild(0).GetComponent<PathLogic>().pos = hit.transform.gameObject.GetComponent<GameGrid>().pos;
+                            }else
+                            {
+                                tmp.GetComponent<BuildingResourceHandler>().enabled = true;
+                                tmp.GetComponent<BuildingResourceHandler>().myPos = hit.transform.gameObject.GetComponent<GameGrid>().pos;
+                            }
+                            foreach(GameObject go in gameObject.GetComponent<PathManager>().paths)
+                            {
+                                go.transform.GetChild(0).GetComponent<PathLogic>().UpdateNeighbours();
+                            }
                         }
                     }
 
