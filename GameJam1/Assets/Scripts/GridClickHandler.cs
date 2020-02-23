@@ -13,11 +13,18 @@ public class GridClickHandler : MonoBehaviour
     public void InstantiateGhost()
     {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 10f;       //we want min distance from the camera
+        mousePos.z = 4f;       //we want min distance from the camera
         Vector3 objectPos = Camera.main.ScreenToWorldPoint(mousePos);
         ghost = Instantiate(uiHandler.getCurrentlySelectedModell().modell, objectPos, Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation));
         ghost.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;
         ghostOriginalMats = new Material[ghost.transform.childCount];
+        try
+        {
+            ghost.GetComponent<Collider>().enabled = false;
+        }catch
+        {
+            
+        }
         if(uiHandler.getCurrentlySelectedModell().ownType != structureType.PATH)
         {
             for(int i = 0; i < ghost.transform.childCount; i++)
@@ -40,12 +47,13 @@ public class GridClickHandler : MonoBehaviour
         {      
             RaycastHit  hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 vect = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f);
+            Vector3 vect = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 4f);
             ghost.transform.position =  Camera.main.ScreenToWorldPoint(vect);
             if (Physics.Raycast(ray, out hit)) //handle ghost
             {
                 GameObject hitGO = hit.transform.gameObject;
                 try{//We expect that the hit object has GameGrid component
+                    //Debug.Log(hitGO.GetComponent<GameGrid>().structure.ToString());
                     if(hitGO.GetComponent<GameGrid>().structure == uiHandler.getCurrentlySelectedModell().canBeBuiltOn || (uiHandler.getCurrentlySelectedModell().ownType == structureType.PATH && hit.transform.gameObject.GetComponent<GameGrid>().structure == structureType.TOWER_BUILD_GRID))
                     {
                         if(uiHandler.getCurrentlySelectedModell().ownType != structureType.PATH)
