@@ -277,7 +277,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 124.1, y: 123.9}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &347747526
@@ -1117,9 +1117,10 @@ MonoBehaviour:
     color: {r: 0.8784314, g: 0.8117647, b: 0.76862746, a: 1}
     type: 8
   grassVariants:
-  - {fileID: 8064213765936259211, guid: e7bed593635838880b756562f980c10f, type: 3}
   - {fileID: 6725112808745201051, guid: a644142916bd7adf988e9d7374e7790e, type: 3}
+  - {fileID: 3801246359017635868, guid: d57873e140d80f76aa8aab19e499aa46, type: 3}
   grid: {fileID: 1772780488288084621, guid: 5c5cb9e03be5fa6238070b71b1414d11, type: 3}
+  portal: {fileID: 6197353663770536287, guid: dd7ea02526db05d2085589fcab982bc6, type: 3}
 --- !u!4 &1576232049
 Transform:
   m_ObjectHideFlags: 0
@@ -1297,6 +1298,8 @@ MonoBehaviour:
   _currentLevel: 1
   _wood: 0
   _stone: 0
+  _javelin: 0
+  _runes: 0
   _humanResources: 0
   _maxEnemy: 0
   _remainingEnemy: 0

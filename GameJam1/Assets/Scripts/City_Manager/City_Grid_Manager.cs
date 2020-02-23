@@ -30,9 +30,12 @@ public class City_Grid_Manager : MonoBehaviour
     public GameObject[,] grids;
     private System.Random random = new System.Random();
 
+    public GameObject portal;
+
+    private GameObject portalInstantiated;
+
     void MakeField()
     {
-        float[] randomRotations = {0f,90f,180f,270f};
         for(int i = 0; i < x_size; i++)
         {
             for(int j = 0; j < y_size; j++)
@@ -43,7 +46,14 @@ public class City_Grid_Manager : MonoBehaviour
                 grids[i,j].GetComponent<GameGrid>().structure = structureType.NOTHING;
                 grids[i,j].GetComponent<GameGrid>().my_cgm = this;
                 grids[i,j].GetComponent<GameGrid>().my_fgm = null;
-                //GameObject tmp = Instantiate(grassVariants[random.Next(grassVariants.Length)],grids[i,j].transform.position + new Vector3(0f,0.51f,0f), Quaternion.Euler(new Vector3(270f,0f, randomRotations[random.Next(randomRotations.Length)])));
+                if(i == 0 && j == 0)
+                {
+                    portalInstantiated = Instantiate(portal,grids[i,j].transform.position + new Vector3(0f,0.51f,0f),Quaternion.identity);
+                    grids[i,j].GetComponent<GameGrid>().structure = structureType.PORTAL;
+                    grids[i,j].GetComponent<GameGrid>().objectsHeld[1] = portalInstantiated;
+                }
+                //GameObject tmp = Instantiate(grassVariants[random.Next(grassVariants.Length)],grids[i,j].transform.position + new Vector3(0f,0.51f,0f), Quaternion.Euler(new Vector3(270f,0f,0f)));
+                //tmp.transform.localScale = new Vector3(0.78f,0.78f,1f);
                 //grids[i,j].GetComponent<GameGrid>().objectsHeld[0] = tmp;
             }
         }

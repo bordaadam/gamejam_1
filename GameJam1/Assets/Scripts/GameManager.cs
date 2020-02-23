@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _currentLevel = 1;
     [SerializeField] private int _wood;
     [SerializeField] private int _stone;
+    [SerializeField] private int _javelin;
+    [SerializeField] private int _runes;
     [SerializeField] private int _humanResources;
     [SerializeField] private int _maxEnemy;
     [SerializeField] private int _remainingEnemy;
@@ -39,6 +41,17 @@ public class GameManager : MonoBehaviour
     {
         get { return _stone; }
         set { _stone = value; }
+    }
+    public int Javelin
+    {
+        get { return _javelin; }
+        set { _javelin = value; }
+    }
+
+    public int Runes
+    {
+        get { return _runes; }
+        set { _runes = value; }
     }
 
     public int HumanResources
