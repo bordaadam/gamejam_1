@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class HangingTrap : BuildingBase
 {
+    protected override void PlaySound()
+    {
+        throw new System.NotImplementedException();
+    }
+
     void Start()
     {
-        sphereCollider = GetComponent<SphereCollider>();
+        collider = GetComponent<BoxCollider>();
     }
 
     void Update()

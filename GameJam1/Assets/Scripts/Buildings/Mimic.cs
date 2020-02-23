@@ -9,7 +9,7 @@ public class Mimic : BuildingBase
 
     void Start()
     {
-        sphereCollider = GetComponent<SphereCollider>();
+        collider = GetComponent<BoxCollider>();
     }
 
     void OnTriggerEnter(Collider col)
@@ -61,5 +61,10 @@ public class Mimic : BuildingBase
     void Shoot()
     {
         // no need to implement
+    }
+
+    protected override void PlaySound()
+    {
+        throw new System.NotImplementedException();
     }
 }
