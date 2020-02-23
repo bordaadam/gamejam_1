@@ -30,9 +30,9 @@ public abstract class EnemyBase : MonoBehaviour
                 gm.RemainingEnemy--;
                 //Mate's code
                 gm.gameObject.GetComponent<UI_Handler>().UpdateHealthUI();
+                ObjectPooler.Instance.Put(tag, gameObject);
                 //EOF Mate's code
                 FillUpHealth();
-                ObjectPooler.Instance.Put(tag, gameObject);
             }
         }
 

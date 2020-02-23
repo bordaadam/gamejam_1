@@ -9,6 +9,10 @@ public abstract class BuildingBase : MonoBehaviour
     [SerializeField] protected GameObject target;
     protected SphereCollider sphereCollider;
     protected bool canShoot = true;
+    [SerializeField] protected string tag;
+    protected GameObject go;
+    [SerializeField] protected GameObject shootingPoint;
+    [SerializeField] protected float shootingSpeed;
 
     [Space]
     [Header("Resources to build")]
@@ -42,11 +46,16 @@ public abstract class BuildingBase : MonoBehaviour
     {
         canShoot = false;
         yield return new WaitForSeconds(time);
+        ObjectPooler.Instance.Put(tag, go);
         canShoot = true;
     }
 
     protected private void Shoot()
     {
+        go = ObjectPooler.Instance.Get(tag, shootingPoint.transform.position, Quaternion.identity);
+
+        go.GetComponent<Rigidbody>().AddForce((target.transform.position - shootingPoint.transform.position)*shootingSpeed, ForceMode.Impulse);
+
         if (target.GetComponent<Peasant>())
         {
             target.GetComponent<Peasant>().currentHealth -= damage;
