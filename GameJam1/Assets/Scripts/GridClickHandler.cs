@@ -6,7 +6,8 @@ public class GridClickHandler : MonoBehaviour
 {
     private UI_Handler uiHandler;
     private GameObject ghost;
-    private Color ghostOriginalColor;
+    private Material[] ghostOriginalMats;
+    public Material errorMat;
 
     public void InstantiateGhost()
     {
@@ -15,7 +16,11 @@ public class GridClickHandler : MonoBehaviour
         Vector3 objectPos = Camera.main.ScreenToWorldPoint(mousePos);
         ghost = Instantiate(uiHandler.getCurrentlySelectedModell().modell, objectPos, Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation));
         ghost.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;
-        ghostOriginalColor = ghost.transform.GetChild(0).GetComponent<Renderer>().material.GetColor("_Color");
+        ghostOriginalMats = new Material[ghost.transform.childCount];
+        for(int i = 0; i < ghost.transform.childCount; i++)
+        {
+            ghostOriginalMats[i] = ghost.transform.GetChild(i).GetComponent<Renderer>().material;
+        }
     }
     private void Start() {
         uiHandler = gameObject.GetComponent<UI_Handler>();
@@ -36,19 +41,28 @@ public class GridClickHandler : MonoBehaviour
                 try{//We expect that the hit object has GameGrid component
                     if(hitGO.GetComponent<GameGrid>().structure == uiHandler.getCurrentlySelectedModell().canBeBuiltOn)
                     {
-                        ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",ghostOriginalColor);
-                        ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                        for(int i = 0; i < ghost.transform.childCount; i++)
+                        {
+                            ghost.transform.GetChild(i).GetComponent<Renderer>().material = ghostOriginalMats[i];
+                            ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                        }
                     }else
                     {
-                        ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",Color.red);
-                        ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                        for(int i = 0; i < ghost.transform.childCount; i++)
+                        {
+                            ghost.transform.GetChild(i).GetComponent<Renderer>().material = errorMat;
+                            ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                        }
                     }
                 }catch{
 
                 }
             }else
             {
-                ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",Color.red);
+                for(int i = 0; i < ghost.transform.childCount; i++)
+                {
+                    ghost.transform.GetChild(i).GetComponent<Renderer>().material = errorMat;
+                }
                 ghost.transform.position =  Camera.main.ScreenToWorldPoint(vect);
             }
             if(Input.GetMouseButtonUp(1))//cancel building mode

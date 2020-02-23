@@ -32,6 +32,12 @@ public class UI_Handler : MonoBehaviour
     public Text description;
     public Camera objectRenderCamera;
 
+    public Image healthImage;
+    public Text healthText;
+    public Text[] resources; //wood,stone,humans
+
+    private GameManager gameManager;
+
     public BuildingStruct getCurrentlySelectedModell()
     {
         return buildingStruct[selectionIndex];
@@ -39,6 +45,15 @@ public class UI_Handler : MonoBehaviour
 
     private int selectionIndex = 0;
     private GameObject currentlyInstantiated;
+
+    private void Start() {
+        gameManager = gameObject.GetComponent<GameManager>();
+    }
+    private void Update() {
+        resources[0].text = gameManager.Wood.ToString();
+        resources[1].text = gameManager.Stone.ToString();
+        resources[2].text = gameManager.HumanResources.ToString();
+    }
 
     public void UpdateInfo()
     {
@@ -120,5 +135,9 @@ public class UI_Handler : MonoBehaviour
         {
             
         }
+    }
+    public void UpdateHealthUI()
+    {
+        healthImage.fillAmount = gameManager.CurrentHealth / gameManager.MaxHealth;
     }
 }

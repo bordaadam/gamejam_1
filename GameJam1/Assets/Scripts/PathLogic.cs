@@ -53,12 +53,10 @@ public class PathLogic : MonoBehaviour
                 //Debug.Log((int)pos.x + " >> " + ((int)pos.y+1) + ">> " +myGrid.GetComponent<GameGrid>().my_cgm.grids[(int)pos.x,(int)pos.y+1].GetComponent<GameGrid>().pos.ToString());
                 if(myGrid.GetComponent<GameGrid>().my_cgm.grids[(int)pos.x,(int)pos.y+1].GetComponent<GameGrid>().objectsHeld[1] != null)
                 {
-                    Debug.Log("Found The Path");
                     if(myGrid.GetComponent<GameGrid>().my_cgm.grids[(int)pos.x,(int)pos.y+1].GetComponent<GameGrid>().objectsHeld[1].tag == "Path")
                     {
                         numOfNeighbours++;
                         neighbours[2] = true;
-                        Debug.Log("Found The Tag");
                     }else
                     {
                         neighbours[2] = false;
@@ -70,12 +68,10 @@ public class PathLogic : MonoBehaviour
             {
                 if(myGrid.GetComponent<GameGrid>().my_cgm.grids[(int)pos.x,(int)pos.y-1].GetComponent<GameGrid>().objectsHeld[1] != null)
                 {
-                    Debug.Log("Found The Path");
                     if(myGrid.GetComponent<GameGrid>().my_cgm.grids[(int)pos.x,(int)pos.y-1].GetComponent<GameGrid>().objectsHeld[1].tag == "Path")
                     {
                         numOfNeighbours++;
                         neighbours[3] = true;
-                        Debug.Log("Found The Tag");
                     }else
                     {
                         neighbours[3] = false;
