@@ -41,6 +41,9 @@ public class UI_Handler : MonoBehaviour
     public Text healthText;
     public Text[] resources; //wood,stone,humans,javelin,runes
     public int populationCount = 200000;
+    public Text woodCostText;
+    public Text stoneCostText;
+    public Text humanCostText;
 
     private GameManager gameManager;
 
@@ -69,7 +72,10 @@ public class UI_Handler : MonoBehaviour
     public void UpdateInfo()
     {
         nameText.text = buildingStruct[selectionIndex].name;
-        description.text = buildingStruct[selectionIndex].description;
+        description.text = buildingStruct[selectionIndex].description.ToString();
+        woodCostText.text = buildingStruct[selectionIndex].woodCost.ToString();
+        stoneCostText.text = buildingStruct[selectionIndex].stoneCost.ToString();
+        humanCostText.text = buildingStruct[selectionIndex].humanCost.ToString();
         currentlyInstantiated = Instantiate(buildingStruct[selectionIndex].modell,objectRenderCamera.transform.position + buildingStruct[selectionIndex].cameraOffset,Quaternion.identity);
         if(buildingStruct[selectionIndex].presRotationOnX)
         {
