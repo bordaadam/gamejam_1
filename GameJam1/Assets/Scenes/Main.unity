@@ -579,7 +579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 459d1777fff74c949ba0ce90798e6a75, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a6dd4bb84e1d5549b6b347f85bbee3d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1393,7 +1393,7 @@ MonoBehaviour:
     percentage: 1
     color: {r: 0.8784314, g: 0.8117647, b: 0.76862746, a: 1}
     type: 8
-    sprite: {fileID: 500926069325791145, guid: 6622230221422023cbdc3a5a49f43caa, type: 3}
+    sprite: {fileID: 500926069325791145, guid: 1a4dca2459ac0e842bfb35ce3a343ac0, type: 3}
   grassVariants:
   - {fileID: 6725112808745201051, guid: a644142916bd7adf988e9d7374e7790e, type: 3}
   - {fileID: 3801246359017635868, guid: d57873e140d80f76aa8aab19e499aa46, type: 3}
@@ -1972,7 +1972,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6f324866663101ebaa44d4a2427dda03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54e28abb9340ef346a947865ffe2668b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2013,6 +2013,7 @@ GameObject:
   - component: {fileID: 1878486422}
   - component: {fileID: 1878486421}
   - component: {fileID: 1878486420}
+  - component: {fileID: 1878486423}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2085,6 +2086,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1878486423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878486419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1da1968345efb448c4bbf76ef7183a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &1880552856
 GameObject:
   m_ObjectHideFlags: 0

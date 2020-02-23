@@ -9,21 +9,10 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-
-        /* if(Input.GetKeyDown(KeyCode.A))
-         {
-             transform.position += Vector3.left * speed;
-         }*/
-
-        /*if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-        {
-            transform.position += speed * new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        }
-
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             transform.position += speed * new Vector3(0, -Input.GetAxis("Mouse ScrollWheel"), 0);
-        }*/
+        }
 
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
