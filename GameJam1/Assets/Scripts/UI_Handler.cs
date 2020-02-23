@@ -36,7 +36,7 @@ public class UI_Handler : MonoBehaviour
 
     public Image healthImage;
     public Text healthText;
-    public Text[] resources; //wood,stone,humans
+    public Text[] resources; //wood,stone,humans,javelin,runes
     public int populationCount = 200000;
 
     private GameManager gameManager;
@@ -58,6 +58,8 @@ public class UI_Handler : MonoBehaviour
         resources[0].text = gameManager.Wood.ToString();
         resources[1].text = gameManager.Stone.ToString();
         resources[2].text = gameManager.HumanResources.ToString();
+        resources[3].text = gameManager.Javelin.ToString();
+        resources[4].text = gameManager.Runes.ToString();
         UpdateHealthUI();
     }
 

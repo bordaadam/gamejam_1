@@ -46,7 +46,6 @@ public class ProductionBuildingManager : MonoBehaviour
         {
             current = queue.Dequeue();
             //print current
-            Debug.Log(grid[current.posX,current.posY].GetComponent<GameGrid>().structure);
             if(grid[current.posX,current.posY].GetComponent<GameGrid>().structure == structureType.PORTAL)
             {
                 return true;
