@@ -43,6 +43,8 @@ public abstract class EnemyBase : MonoBehaviour
             FillUpHealth();
             ObjectPooler.Instance.Put(tag, gameObject);
         }
+
+
     }
 
     protected void GoToNext(Vector3 next)
@@ -61,6 +63,24 @@ public abstract class EnemyBase : MonoBehaviour
         if (GetComponent<Knight>())
         {
             GetComponent<Knight>().currentHealth = maxHealth;
+        }
+    }
+
+    protected void OnTriggerEnter(Collider col)
+    {
+        if(col.GetComponent<HangingTrap>())
+        {
+            Debug.Log("IM AFRAID ");
+            movementSpeed /= 2;
+        }
+    }
+
+    protected void OnTriggerExit(Collider col)
+    {
+        if (col.GetComponent<HangingTrap>())
+        {
+            Debug.Log("NOT AFRAID ANYMORE");
+            movementSpeed *= 2;
         }
     }
 }
