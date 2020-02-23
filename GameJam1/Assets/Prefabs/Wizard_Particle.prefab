@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4521487795777252361}
   - component: {fileID: 4521487795777252360}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Wizard_Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4521487795777252362}
-  m_LocalRotation: {x: 0.0071350634, y: -0.0000024376932, z: 0.0003416671, w: 0.9999745}
+  m_LocalRotation: {x: 0.007138324, y: -0.0000024294088, z: 0.00034032456, w: 0.99997455}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.7560993, y: 1.7560993, z: 1.7560993}
+  m_LocalScale: {x: 1.7560987, y: 1.7560984, z: 1.7560984}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -89.18201, y: 0, z: 0.039}
+  m_LocalEulerAnglesHint: {x: 0.818, y: 0, z: 0.039}
 --- !u!198 &4521487795777252361
 ParticleSystem:
   m_ObjectHideFlags: 0

@@ -19,9 +19,6 @@ public class EnemySpawner : MonoBehaviour
         gm = GameManager.Instance;
     }
 
-    // csak akkor spawnoljunk ellenséget, ha remaining az > 0
-    // ha megölünk vagy bemegy az ellenség, akkor remaining-- és az élet is....
-
     void Update()
     {
         if(canSpawn && gm.NeedToSpawn > 0)
