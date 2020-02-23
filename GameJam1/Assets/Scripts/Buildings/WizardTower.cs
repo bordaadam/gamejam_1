@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class WizardTower : BuildingBase
 {
+
+    private AudioSource source;
+
     protected override void PlaySound()
     {
-        throw new System.NotImplementedException();
+        source.Play();
     }
 
     void Start()
     {
         collider = GetComponent<BoxCollider>();
+        source = GetComponent<AudioSource>();
     }
 }
