@@ -11,7 +11,6 @@ public class PathLogic : MonoBehaviour
     public void UpdateNeighbours()
     {
         int numOfNeighbours = 0;
-        Debug.Log(pos.ToString());
         if(myGrid.GetComponent<GameGrid>().my_cgm != null)
         {
             int xSize = myGrid.GetComponent<GameGrid>().my_cgm.x_size;
