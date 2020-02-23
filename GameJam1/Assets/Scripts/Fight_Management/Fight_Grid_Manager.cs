@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class Fight_Grid_Manager : MonoBehaviour
     [SerializeField] private GameObject gridPrefab;
     [SerializeField] private int wideness, depth;
     [SerializeField] private Color pathColor;
+    [SerializeField] private Material[] grassVariants;
 
     public int GetWideness()
     {
@@ -48,6 +50,7 @@ public class Fight_Grid_Manager : MonoBehaviour
         parent = GameObject.Find("FightLevel");
         grids = GenerateGrids(wideness, depth);
         GeneratePath();
+        //PutGrass();
     }
 
     private GameObject[,] GenerateGrids(int w, int h) 
@@ -60,13 +63,19 @@ public class Fight_Grid_Manager : MonoBehaviour
             {
                 GameObject obj = Instantiate(gridPrefab, new Vector3(i, 0f, j), Quaternion.identity); // actual grid
                 obj.transform.parent = parent.transform;
+                int randomGrass = UnityEngine.Random.Range(0, 3); // [0-3]
+                obj.GetComponent<MeshRenderer>().material = grassVariants[randomGrass];
                 
                 
                 obj.GetComponent<GameGrid>().pos = new Vector2(i, j);
                 obj.GetComponent<GameGrid>().structure = structureType.TOWER_BUILD_GRID;
                 obj.GetComponent<GameGrid>().my_fgm = this;
                 obj.GetComponent<GameGrid>().my_cgm = null;
+
+                // Grass
                 tmp[i,j] = obj;
+
+
             }
         }
 
@@ -91,7 +100,7 @@ public class Fight_Grid_Manager : MonoBehaviour
 
         while((currentX != endX) || (currentY != endY))
         {
-            int random = Random.Range(0, 2);
+            int random = UnityEngine.Random.Range(0, 2);
             Debug.Log("Erre megy a random: " + random);
 
             if(random == 0)
