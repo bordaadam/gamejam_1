@@ -6,6 +6,8 @@ using UnityEngine;
 public class Fight_Grid_Manager : MonoBehaviour
 {
     public GameObject[,] grids;
+
+    public GameObject portal;
     [SerializeField] private GameObject gridPrefab;
     [SerializeField] private int wideness, depth;
     [SerializeField] private Color pathColor;
@@ -122,6 +124,16 @@ public class Fight_Grid_Manager : MonoBehaviour
                 }
             }
         }
+
+        GameObject portalInstantiated = Instantiate(portal,grids[wideness-1,depth-1].transform.position + new Vector3(0f,0.75f,0f),Quaternion.identity);
+        grids[wideness-1,depth-1].GetComponent<GameGrid>().structure = structureType.PORTAL;
+        portalInstantiated.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+        portalInstantiated.transform.GetChild(2).localScale = new Vector3(0.1f,0.1f,0.1f);
+        if(grids[wideness-2,depth-1].transform.position.y == 0)
+        {
+            portalInstantiated.transform.rotation = Quaternion.Euler(new Vector3(0f,90f,0f));
+        }
+        grids[wideness-1,depth-1].GetComponent<GameGrid>().objectsHeld[1] = portalInstantiated;
 
     }
 
