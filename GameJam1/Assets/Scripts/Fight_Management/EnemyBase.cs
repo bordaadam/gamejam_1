@@ -28,8 +28,11 @@ public abstract class EnemyBase : MonoBehaviour
                 // ENEMY REACHED THE FINAL TILE!
                 gm.CurrentHealth -= damage;
                 gm.RemainingEnemy--;
-                FillUpHealth();
+                //Mate's code
+                gm.gameObject.GetComponent<UI_Handler>().UpdateHealthUI();
                 ObjectPooler.Instance.Put(tag, gameObject);
+                //EOF Mate's code
+                FillUpHealth();
             }
         }
 

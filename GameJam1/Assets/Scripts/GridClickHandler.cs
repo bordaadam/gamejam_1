@@ -7,6 +7,8 @@ public class GridClickHandler : MonoBehaviour
     private UI_Handler uiHandler;
     private GameObject ghost;
     private Color ghostOriginalColor;
+    private Material[] ghostOriginalMats;
+    public Material errorMat;
 
     public void InstantiateGhost()
     {
@@ -15,7 +17,17 @@ public class GridClickHandler : MonoBehaviour
         Vector3 objectPos = Camera.main.ScreenToWorldPoint(mousePos);
         ghost = Instantiate(uiHandler.getCurrentlySelectedModell().modell, objectPos, Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation));
         ghost.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;
-        ghostOriginalColor = ghost.transform.GetChild(0).GetComponent<Renderer>().material.GetColor("_Color");
+        ghostOriginalMats = new Material[ghost.transform.childCount];
+        if(uiHandler.getCurrentlySelectedModell().ownType != structureType.PATH)
+        {
+            for(int i = 0; i < ghost.transform.childCount; i++)
+            {
+                ghostOriginalMats[i] = ghost.transform.GetChild(i).GetComponent<Renderer>().material;
+            }
+        }else
+        {
+            ghostOriginalColor = ghost.transform.GetChild(0).GetComponent<Renderer>().material.GetColor("_Color");
+        }
     }
     private void Start() {
         uiHandler = gameObject.GetComponent<UI_Handler>();
@@ -34,21 +46,50 @@ public class GridClickHandler : MonoBehaviour
             {
                 GameObject hitGO = hit.transform.gameObject;
                 try{//We expect that the hit object has GameGrid component
-                    if(hitGO.GetComponent<GameGrid>().structure == uiHandler.getCurrentlySelectedModell().canBeBuiltOn)
+                    if(hitGO.GetComponent<GameGrid>().structure == uiHandler.getCurrentlySelectedModell().canBeBuiltOn || (uiHandler.getCurrentlySelectedModell().ownType == structureType.PATH && hit.transform.gameObject.GetComponent<GameGrid>().structure == structureType.TOWER_BUILD_GRID))
                     {
-                        ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",ghostOriginalColor);
-                        ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                        if(uiHandler.getCurrentlySelectedModell().ownType != structureType.PATH)
+                        {
+                            for(int i = 0; i < ghost.transform.childCount; i++)
+                            {
+                                ghost.transform.GetChild(i).GetComponent<Renderer>().material = ghostOriginalMats[i];
+                                ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                            }
+                        }else
+                        {
+                            ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",ghostOriginalColor);
+                            ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                        }
                     }else
                     {
-                        ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",Color.red);
-                        ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                        if(uiHandler.getCurrentlySelectedModell().ownType != structureType.PATH)
+                        {
+                            for(int i = 0; i < ghost.transform.childCount; i++)
+                            {
+                                ghost.transform.GetChild(i).GetComponent<Renderer>().material = errorMat;
+                                ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                            }
+                        }else
+                        {
+                            ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",Color.red);
+                            ghost.transform.position = hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset;
+                        }
                     }
                 }catch{
 
                 }
             }else
             {
-                ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",Color.red);
+                if(uiHandler.getCurrentlySelectedModell().ownType != structureType.PATH)
+                {
+                    for(int i = 0; i < ghost.transform.childCount; i++)
+                    {
+                        ghost.transform.GetChild(i).GetComponent<Renderer>().material = errorMat;
+                    }
+                }else
+                {
+                    ghost.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color",Color.red);
+                }
                 ghost.transform.position =  Camera.main.ScreenToWorldPoint(vect);
             }
             if(Input.GetMouseButtonUp(1))//cancel building mode
@@ -66,11 +107,16 @@ public class GridClickHandler : MonoBehaviour
             {
                 try //We expect to have a grid component attached to the hit object
                 {
-                    if(uiHandler.isBuildingMode && hit.transform.gameObject.GetComponent<GameGrid>().structure == uiHandler.getCurrentlySelectedModell().canBeBuiltOn)
+                    if(uiHandler.isBuildingMode && (hit.transform.gameObject.GetComponent<GameGrid>().structure == uiHandler.getCurrentlySelectedModell().canBeBuiltOn || (uiHandler.getCurrentlySelectedModell().ownType == structureType.PATH && hit.transform.gameObject.GetComponent<GameGrid>().structure == structureType.TOWER_BUILD_GRID)))
                     {
                         GameObject.Destroy(ghost);
                         uiHandler.isBuildingMode = false;
                         hit.transform.gameObject.GetComponent<GameGrid>().structure = uiHandler.getCurrentlySelectedModell().ownType;
+                        if(hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0] != null)
+                        {
+                            GameObject.Destroy(hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0]);
+                            hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0] = null;
+                        }
                         GameObject tmp = Instantiate(uiHandler.getCurrentlySelectedModell().modell,hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset,Quaternion.identity);
                         tmp.transform.rotation = Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation);
                         tmp.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;

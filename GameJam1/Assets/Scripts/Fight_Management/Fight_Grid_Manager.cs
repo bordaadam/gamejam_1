@@ -61,7 +61,7 @@ public class Fight_Grid_Manager : MonoBehaviour
                 
                 
                 obj.GetComponent<GameGrid>().pos = new Vector2(i, j);
-                obj.GetComponent<GameGrid>().structure = structureType.NOTHING;
+                obj.GetComponent<GameGrid>().structure = structureType.TOWER_BUILD_GRID;
                 obj.GetComponent<GameGrid>().my_fgm = this;
                 obj.GetComponent<GameGrid>().my_cgm = null;
                 tmp[i,j] = obj;
