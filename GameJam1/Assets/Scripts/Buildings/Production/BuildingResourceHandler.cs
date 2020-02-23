@@ -31,6 +31,7 @@ public class BuildingResourceHandler : MonoBehaviour
             fgm = gm.GetComponent<Fight_Grid_Manager>();
             cgm = null;
         }
+        Debug.Log("FASZ:" + gameObject.name);
     }
 
     // Update is called once per frame

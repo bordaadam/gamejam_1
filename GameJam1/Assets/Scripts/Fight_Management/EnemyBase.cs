@@ -70,8 +70,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if(col.GetComponent<HangingTrap>())
         {
-            Debug.Log("IM AFRAID ");
-            movementSpeed /= 2;
+            movementSpeed /= 1.25f;
         }
     }
 
@@ -79,8 +78,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (col.GetComponent<HangingTrap>())
         {
-            Debug.Log("NOT AFRAID ANYMORE");
-            movementSpeed *= 2;
+            movementSpeed *= 1.25f;
         }
     }
 }
