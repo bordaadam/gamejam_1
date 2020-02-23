@@ -18,7 +18,13 @@ public class GridClickHandler : MonoBehaviour
         ghost = Instantiate(uiHandler.getCurrentlySelectedModell().modell, objectPos, Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation));
         ghost.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;
         ghostOriginalMats = new Material[ghost.transform.childCount];
-        ghost.GetComponent<Collider>().enabled = false;
+        try
+        {
+            ghost.GetComponent<Collider>().enabled = false;
+        }catch
+        {
+            
+        }
         if(uiHandler.getCurrentlySelectedModell().ownType != structureType.PATH)
         {
             for(int i = 0; i < ghost.transform.childCount; i++)
