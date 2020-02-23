@@ -1278,6 +1278,11 @@ PrefabInstance:
       propertyPath: LightsModule.light
       value: 
       objectReference: {fileID: 8347705176138741367}
+    - target: {fileID: 4521487795777252361, guid: 1341ab1c74487584cbf674ce76d39b5d,
+        type: 3}
+      propertyPath: ShapeModule.m_Texture
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4521487795777252362, guid: 1341ab1c74487584cbf674ce76d39b5d,
         type: 3}
       propertyPath: m_Name

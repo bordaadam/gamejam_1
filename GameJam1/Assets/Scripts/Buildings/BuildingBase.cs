@@ -58,21 +58,37 @@ public abstract class BuildingBase : MonoBehaviour
             target = null;
             return;
         }
+        bool canShoot = false;
+        if(GetComponent<WoodenTower>() && GameManager.Instance.Javelin > 0)
+        {
+            GameManager.Instance.Javelin--;
+            if (target.GetComponent<Peasant>())
+            {
+                target.GetComponent<Peasant>().currentHealth -= damage;
+            }
+            if (target.GetComponent<Knight>())
+            {
+                target.GetComponent<Knight>().currentHealth -= damage;
+            }
+        }
 
-        PlaySound();
+        if(GetComponent<WizardTower>() && GameManager.Instance.Runes > 0)
+        {
+            GameManager.Instance.Runes--;
+            if (target.GetComponent<Peasant>())
+            {
+                target.GetComponent<Peasant>().currentHealth -= damage;
+            }
+            if (target.GetComponent<Knight>())
+            {
+                target.GetComponent<Knight>().currentHealth -= damage;
+            }
+        }
 
         go = ObjectPooler.Instance.Get(tag, shootingPoint.transform.position, Quaternion.identity);
-
         go.GetComponent<Rigidbody>().AddForce((target.transform.position - shootingPoint.transform.position), ForceMode.Impulse);
 
-        if (target.GetComponent<Peasant>())
-        {
-            target.GetComponent<Peasant>().currentHealth -= damage;
-        }
-        if (target.GetComponent<Knight>())
-        {
-            target.GetComponent<Knight>().currentHealth -= damage;
-        }
+        PlaySound();
     }
 
     protected void OnDrawGizmos()
@@ -83,4 +99,5 @@ public abstract class BuildingBase : MonoBehaviour
     }
 
     protected abstract void PlaySound();
+    protected abstract void TakeResource();
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +17,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _currentHealth;
     [SerializeField] private int _needToSpawn;
+    [SerializeField] private GameObject deathPanel;
+    [SerializeField] private GameObject infoPanel, button;
+    [SerializeField] private AudioClip gameOver;
+    private bool dead = false;
+    [SerializeField] private AudioSource music;
+
+
 
     private bool levelFinished = false;
 
@@ -101,6 +110,7 @@ public class GameManager : MonoBehaviour
         RemainingEnemy = MaxEnemy;
         CurrentHealth = MaxHealth;
         NeedToSpawn = MaxEnemy;
+        music.volume = 0.3f;
     }
 
     void Update()
@@ -112,7 +122,7 @@ public class GameManager : MonoBehaviour
             LevelUp();
         }
 
-        if(CurrentHealth < 0)
+        if(CurrentHealth < 1 && !dead)
         {
             GameOver();
         }
@@ -129,7 +139,22 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("You died.. lol");
-        // TODO halál képernyő
+        deathPanel.SetActive(true);
+        infoPanel.SetActive(false);
+        button.SetActive(false);
+        dead = true;
+        music.volume = 0;
+        GetComponent<AudioSource>().PlayOneShot(gameOver);
+        Destroy(GameObject.Find("MenuMaster"));
+    }
+
+    public void GoBackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(1);
     }
 }

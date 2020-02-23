@@ -13,42 +13,46 @@ public class MenuControls : MonoBehaviour
     }
 
 
-    public static int width;
-    public static int height;
+    public int width;
+    public int height;
     public Text inputWidth;
     public Text inputHeight;
+    public Slider Swidth;
+    public Slider Sheight;
 
 
     public void MainMenu()
     {
         GameObject.Find("MainMenuCanvas").GetComponent<Canvas>().enabled = true;
-        GameObject.Find("NewGameCanvas").GetComponent<Canvas>().enabled = false;
-        GameObject.Find("Options").GetComponent<Canvas>().enabled = false;
     }
 
     public void StartGame()
     {
-        width = int.Parse(inputWidth.text);
-        height = int.Parse(inputHeight.text);
+        width = (int)Swidth.value;
+        height = (int)Sheight.value;
         SceneManager.LoadScene("Main");
         Debug.Log(width+" "+ height);
     }
 
     public void OptionsMenu()
     {
-        GameObject.Find("Options").GetComponent<Canvas>().enabled = true; ;
         GameObject.Find("MainMenuCanvas").GetComponent<Canvas>().enabled = false;
     }
 
     public void NewGameMenu()
     {
         GameObject.Find("MainMenuCanvas").GetComponent<Canvas>().enabled = false;
-        GameObject.Find("NewGameCanvas").GetComponent<Canvas>().enabled = true; ;
     }
 
     public void CreditsMenu()
     {
         
+    }
+
+    void Update()
+    {
+        inputWidth.text = "Width: " + Swidth.value;
+        inputHeight.text = "Height: " + Sheight.value;
     }
 
     public void Quit()

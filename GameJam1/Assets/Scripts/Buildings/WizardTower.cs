@@ -12,6 +12,11 @@ public class WizardTower : BuildingBase
         source.Play();
     }
 
+    protected override void TakeResource()
+    {
+        GameManager.Instance.Runes--;
+    }
+
     void Start()
     {
         collider = GetComponent<BoxCollider>();

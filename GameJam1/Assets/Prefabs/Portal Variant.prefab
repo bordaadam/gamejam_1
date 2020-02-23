@@ -747,7 +747,7 @@ ParticleSystem:
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
-    m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+    m_Texture: {fileID: 0}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
     m_TextureUVChannel: 0
@@ -4831,7 +4831,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: a80ca297136175d41a831312a84c0e86,
         type: 3}
       propertyPath: m_Name
-      value: Portal
+      value: Portal Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a80ca297136175d41a831312a84c0e86, type: 3}

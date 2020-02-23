@@ -9,25 +9,35 @@ public class EnemySpawner : MonoBehaviour
     private Fight_Grid_Manager fgm;
     private GameManager gm;
     private bool canSpawn = true;
+    private bool firstSpawn = false;
 
-    private const string KNIGHT = "Knight";
-    private const string PEASANT = "Peasant";
+    [SerializeField] private float timeToFirstSpawn = 10f;
 
     void Start()
     {
         fgm = Fight_Grid_Manager.Instance;
         gm = GameManager.Instance;
+        StartCoroutine(First(timeToFirstSpawn));
+    }
+
+    IEnumerator First(float time)
+    {
+        yield return new WaitForSeconds(time);
+        firstSpawn = true;
     }
 
     void Update()
     {
-        if(canSpawn && gm.NeedToSpawn > 0)
+        if(firstSpawn)
         {
-            Debug.Log("Spawnolok enemyt!");
-            // SPAWN
-            gm.NeedToSpawn--;
-            SpawnRandom();
-            StartCoroutine(Wait(timeBetweenSpawns));
+            if(canSpawn && gm.NeedToSpawn > 0)
+            {
+                Debug.Log("Spawnolok enemyt!");
+                // SPAWN
+                gm.NeedToSpawn--;
+                SpawnRandom();
+                StartCoroutine(Wait(timeBetweenSpawns));
+            }
         }
     }
 

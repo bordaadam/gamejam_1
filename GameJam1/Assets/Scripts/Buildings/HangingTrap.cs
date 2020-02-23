@@ -9,6 +9,11 @@ public class HangingTrap : BuildingBase
         throw new System.NotImplementedException();
     }
 
+    protected override void TakeResource()
+    {
+        throw new System.NotImplementedException();
+    }
+
     void Start()
     {
         collider = GetComponent<BoxCollider>();

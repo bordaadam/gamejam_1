@@ -20,4 +20,8 @@ public class WoodenTower : BuildingBase
         source.Play();
     }
 
+    protected override void TakeResource()
+    {
+        GameManager.Instance.Javelin--;
+    }
 }

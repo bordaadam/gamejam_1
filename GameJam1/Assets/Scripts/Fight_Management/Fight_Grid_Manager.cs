@@ -47,10 +47,29 @@ public class Fight_Grid_Manager : MonoBehaviour
 
     void Start()
     {
+        wideness = GameObject.Find("MenuMaster").GetComponent<MenuControls>().width;
+        depth = GameObject.Find("MenuMaster").GetComponent<MenuControls>().height;
         parent = GameObject.Find("FightLevel");
         grids = GenerateGrids(wideness, depth);
         GeneratePath();
+        FuckmyAss();
         //PutGrass();
+    }
+
+    void FuckmyAss()
+    {
+        for (int i = 0; i < wideness; i++)
+        {
+            for (int j = 0; j < depth; j++)
+            {
+                grids[i, j].transform.position = new Vector3(grids[i, j].transform.position.x - 32, grids[i, j].transform.position.y, grids[i, j].transform.position.z);
+            }
+        }
+
+        for(int i = 0; i < PathVectors.Count; i++)
+        {
+            PathVectors[i] = new Vector3(PathVectors[i].x - 32, PathVectors[i].y, PathVectors[i].z);
+        }
     }
 
     private GameObject[,] GenerateGrids(int w, int h) 
@@ -125,10 +144,11 @@ public class Fight_Grid_Manager : MonoBehaviour
             }
         }
 
-        GameObject portalInstantiated = Instantiate(portal,grids[wideness-1,depth-1].transform.position + new Vector3(0f,0.75f,0f),Quaternion.identity);
+        GameObject portalInstantiated = Instantiate(portal,grids[wideness-1,depth-1].transform.position + new Vector3(0f,1.25f,0f),Quaternion.identity);
+        portalInstantiated.transform.position = new Vector3(portalInstantiated.transform.position.x - 32, portalInstantiated.transform.position.y, portalInstantiated.transform.position.z);
         grids[wideness-1,depth-1].GetComponent<GameGrid>().structure = structureType.PORTAL;
-        portalInstantiated.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
-        portalInstantiated.transform.GetChild(2).localScale = new Vector3(0.1f,0.1f,0.1f);
+        portalInstantiated.transform.localScale = new Vector3(0.3f,0.3f,0.3f);
+        portalInstantiated.transform.GetChild(2).localScale = new Vector3(0.3f,0.3f,0.3f);
         if(grids[wideness-2,depth-1].transform.position.y == 0)
         {
             portalInstantiated.transform.rotation = Quaternion.Euler(new Vector3(0f,90f,0f));

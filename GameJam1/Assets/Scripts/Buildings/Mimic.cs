@@ -67,4 +67,9 @@ public class Mimic : BuildingBase
     {
         throw new System.NotImplementedException();
     }
+
+    protected override void TakeResource()
+    {
+        throw new System.NotImplementedException();
+    }
 }

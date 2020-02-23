@@ -38,7 +38,8 @@ public class City_Grid_Manager : MonoBehaviour
 
     void MakeField()
     {
-        for(int i = 0; i < x_size; i++)
+       
+        for (int i = 0; i < x_size; i++)
         {
             for(int j = 0; j < y_size; j++)
             {
@@ -50,10 +51,11 @@ public class City_Grid_Manager : MonoBehaviour
                 grids[i,j].GetComponent<GameGrid>().my_fgm = null;
                 if(i == 0 && j == 0)
                 {
-                    portalInstantiated = Instantiate(portal,grids[i,j].transform.position + new Vector3(0f,0.75f,0f),Quaternion.identity);
+                    portalInstantiated = Instantiate(portal,grids[i,j].transform.position + new Vector3(0f,1.25f,0f),Quaternion.identity);
+                    Debug.Log("EZ:" + portalInstantiated.transform.GetChild(2));
                     grids[i,j].GetComponent<GameGrid>().structure = structureType.PORTAL;
-                    portalInstantiated.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
-                    portalInstantiated.transform.GetChild(2).localScale = new Vector3(0.1f,0.1f,0.1f);
+                    portalInstantiated.transform.localScale = new Vector3(0.3f,0.3f,0.3f);
+                    portalInstantiated.transform.GetChild(2).localScale = new Vector3(0.3f,0.3f,0.3f);
                     portalInstantiated.transform.rotation = Quaternion.Euler(new Vector3(0f,90f,0f));
                     grids[i,j].GetComponent<GameGrid>().objectsHeld[1] = portalInstantiated;
                 }
@@ -94,6 +96,8 @@ public class City_Grid_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        x_size = GameObject.Find("MenuMaster").GetComponent<MenuControls>().width;
+        y_size = GameObject.Find("MenuMaster").GetComponent<MenuControls>().height;
         grids = new GameObject[x_size,y_size];
         MakeField();
         InstallResources();
