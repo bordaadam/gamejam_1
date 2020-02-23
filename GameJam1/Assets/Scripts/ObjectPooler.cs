@@ -67,6 +67,7 @@ public class ObjectPooler : MonoBehaviour
         }
 
         go.SetActive(false);
+        go.transform.position = new Vector3(0, 30, 0);
 
         poolDictionary[tag].Enqueue(go);
     }

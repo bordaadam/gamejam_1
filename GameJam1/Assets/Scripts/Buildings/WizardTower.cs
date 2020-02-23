@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class WizardTower : BuildingBase
 {
+    protected override void PlaySound()
+    {
+        throw new System.NotImplementedException();
+    }
+
     void Start()
     {
-        sphereCollider = GetComponent<SphereCollider>();
+        collider = GetComponent<BoxCollider>();
     }
 }
