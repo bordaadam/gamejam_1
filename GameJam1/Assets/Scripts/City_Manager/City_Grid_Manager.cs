@@ -43,7 +43,7 @@ public class City_Grid_Manager : MonoBehaviour
             for(int j = 0; j < y_size; j++)
             {
                 grids[i,j] = Instantiate(grid, new Vector3(i+x_offset,0f,j+y_offset),Quaternion.identity);
-                //grids[i,j].GetComponent<Renderer>().material.SetColor("_Color",baseColor);
+                grids[i,j].GetComponent<Renderer>().material.SetColor("_Color",baseColor);
                 grids[i,j].GetComponent<GameGrid>().pos = new Vector2(i,j);
                 grids[i,j].GetComponent<GameGrid>().structure = structureType.NOTHING;
                 grids[i,j].GetComponent<GameGrid>().my_cgm = this;
