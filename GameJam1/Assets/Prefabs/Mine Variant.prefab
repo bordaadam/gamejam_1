@@ -81,7 +81,12 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 5c834c3f0abc2b64db5c5679346e3668,
         type: 3}
       propertyPath: m_Name
-      value: Mine
+      value: Mine Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5c834c3f0abc2b64db5c5679346e3668,
+        type: 3}
+      propertyPath: m_TagString
+      value: Path
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c834c3f0abc2b64db5c5679346e3668, type: 3}

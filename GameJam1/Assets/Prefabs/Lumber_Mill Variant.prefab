@@ -81,7 +81,12 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: db5daa1d8324a984ead2e395d58b3971,
         type: 3}
       propertyPath: m_Name
-      value: Lumber_Mill
+      value: Lumber_Mill Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: db5daa1d8324a984ead2e395d58b3971,
+        type: 3}
+      propertyPath: m_TagString
+      value: Path
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db5daa1d8324a984ead2e395d58b3971, type: 3}

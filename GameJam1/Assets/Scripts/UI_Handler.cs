@@ -35,6 +35,7 @@ public class UI_Handler : MonoBehaviour
     public Image healthImage;
     public Text healthText;
     public Text[] resources; //wood,stone,humans
+    public int populationCount = 200000;
 
     private GameManager gameManager;
 
@@ -48,11 +49,13 @@ public class UI_Handler : MonoBehaviour
 
     private void Start() {
         gameManager = gameObject.GetComponent<GameManager>();
+        UpdateHealthUI();
     }
     private void Update() {
         resources[0].text = gameManager.Wood.ToString();
         resources[1].text = gameManager.Stone.ToString();
         resources[2].text = gameManager.HumanResources.ToString();
+        UpdateHealthUI();
     }
 
     public void UpdateInfo()
@@ -139,5 +142,6 @@ public class UI_Handler : MonoBehaviour
     public void UpdateHealthUI()
     {
         healthImage.fillAmount = gameManager.CurrentHealth / gameManager.MaxHealth;
+        healthText.text = "Population: " + Mathf.Floor(populationCount * healthImage.fillAmount).ToString();
     }
 }

@@ -85,6 +85,11 @@ public class GridClickHandler : MonoBehaviour
                         GameObject.Destroy(ghost);
                         uiHandler.isBuildingMode = false;
                         hit.transform.gameObject.GetComponent<GameGrid>().structure = uiHandler.getCurrentlySelectedModell().ownType;
+                        if(hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0] != null)
+                        {
+                            GameObject.Destroy(hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0]);
+                            hit.transform.gameObject.GetComponent<GameGrid>().objectsHeld[0] = null;
+                        }
                         GameObject tmp = Instantiate(uiHandler.getCurrentlySelectedModell().modell,hit.transform.position + uiHandler.getCurrentlySelectedModell().instantiateOffset,Quaternion.identity);
                         tmp.transform.rotation = Quaternion.Euler(uiHandler.getCurrentlySelectedModell().instantiateRotation);
                         tmp.transform.localScale = uiHandler.getCurrentlySelectedModell().instantiateScale;

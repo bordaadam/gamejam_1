@@ -81,7 +81,12 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 3268ee596c1fcfc4e96480b9fd53b007,
         type: 3}
       propertyPath: m_Name
-      value: Javelin_Maker
+      value: Javelin_Maker Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 3268ee596c1fcfc4e96480b9fd53b007,
+        type: 3}
+      propertyPath: m_TagString
+      value: Path
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3268ee596c1fcfc4e96480b9fd53b007, type: 3}

@@ -19,6 +19,8 @@ public class City_Grid_Manager : MonoBehaviour
 
     public ResourceProperties[] resProps;
 
+    public GameObject[] grassVariants;
+
     public GameObject grid;
 
     public GameObject[,] grids;
@@ -26,6 +28,7 @@ public class City_Grid_Manager : MonoBehaviour
 
     void MakeField()
     {
+        float[] randomRotations = {0f,90f,180f,270f};
         for(int i = 0; i < x_size; i++)
         {
             for(int j = 0; j < y_size; j++)
@@ -36,6 +39,8 @@ public class City_Grid_Manager : MonoBehaviour
                 grids[i,j].GetComponent<GameGrid>().structure = structureType.NOTHING;
                 grids[i,j].GetComponent<GameGrid>().my_cgm = this;
                 grids[i,j].GetComponent<GameGrid>().my_fgm = null;
+                //GameObject tmp = Instantiate(grassVariants[random.Next(grassVariants.Length)],grids[i,j].transform.position + new Vector3(0f,0.51f,0f), Quaternion.Euler(new Vector3(270f,0f, randomRotations[random.Next(randomRotations.Length)])));
+                //grids[i,j].GetComponent<GameGrid>().objectsHeld[0] = tmp;
             }
         }
     }
@@ -53,7 +58,6 @@ public class City_Grid_Manager : MonoBehaviour
                 if(gridCellType.structure == structureType.NOTHING)
                 {
                     gridCellType.structure = rp.type;
-                    //gridCellType.objectsHeld[0] = 
                     gridCell.GetComponent<Renderer>().material.SetColor("_Color",rp.color);
                     typeTileCount--;
                 }else
